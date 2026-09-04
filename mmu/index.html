@@ -45,6 +45,12 @@
   .steps .s.ch{cursor:pointer}
   .steps .s.ch:hover h4{color:var(--navy)}
   .steps .ts{font-size:11px;font-weight:600;color:var(--navy);background:var(--navy-soft);border-radius:10px;padding:1px 8px;margin-left:6px;vertical-align:2px}
+  .fullvid{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+  .fullvid summary{cursor:pointer;font-size:13.5px;font-weight:700;color:var(--navy);list-style:none}
+  .fullvid summary::-webkit-details-marker{display:none}
+  .fullvid summary::before{content:"▸ ";color:var(--navy)}
+  .fullvid[open] summary::before{content:"▾ "}
+  .phone-sm{max-width:230px;margin:14px 0 0}
   .phone .pending{aspect-ratio:9/19.5;border-radius:18px;background:linear-gradient(160deg,#2D5399,#1C3A6E);color:#DCE6F6;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font-size:13px;line-height:1.7}
   .phone .pending b{display:block;color:#fff;font-size:15px;margin-bottom:6px}
   .caption{font-size:12.5px;color:var(--ink-faint);margin-top:10px;line-height:1.6}
@@ -120,7 +126,7 @@
       <span>角色 <b>产品负责人</b>（0→1）</span>
       <span>时间 <b>2026.03 – 2026.06</b></span>
       <span>状态 <b>内测验证完成 · 未上线</b></span>
-      <span>形态 <b>Android App（内测版 · 界面名 Atelier AI）</b></span>
+      <span>形态 <b>Android App（内测版）</b></span>
     </div>
   </header>
 
@@ -135,16 +141,22 @@
         <div>
           <div class="steps">
             <div class="s ch" data-t="0"><div><h4>识别已有化妆品 <span class="ts">00:00</span></h4><p>拍包装即识别品牌与产品，给出识别摘要、成分分析与致痘致敏提示，确认后入库到「我的化妆台」。推荐从用户已经拥有的东西出发，而不是先卖货。</p></div></div>
-            <div class="s ch" data-t="14"><div><h4>输入场景与偏好 <span class="ts">00:14</span></h4><p>场景（通勤 / 约会 / 休闲 / 晚宴）、风格、时间预估、难度期望、偏好限制（如「不想用粉底」）、自由补充。用户不必会描述妆容，选一选就行。</p></div></div>
-            <div class="s ch" data-t="25"><div><h4>生成妆容 + 自拍试妆 <span class="ts">00:25</span></h4><p>按「用户画像 — 产品库 — 场景风格」三路召回与重排，给出能用现有产品完成的方案；可调用前置相机做自拍试妆预览。</p></div></div>
-            <div class="s ch" data-t="37"><div><h4>5 步分步教学 <span class="ts">00:37</span></h4><p>把一个妆拆成 5 步，每步配示范视频、手法与建议，只说这一步该用哪支、怎么涂。这是内测里好评最高的部分。</p></div></div>
-            <div class="s ch" data-t="54"><div><h4>完成反馈 → 复盘沉淀 <span class="ts">00:54</span></h4><p>做完后回答「这次顺手吗」并记录备注，保存为复盘进入「灵感工坊」，形成「学 → 做 → 改」的闭环。</p></div></div>
-            <div class="s ch" data-t="77"><div><h4>AI 实时视频指导 <span class="ts">01:17</span></h4><p>打开摄像头，AI 看着画面按当前步骤给出提示并识别语音，边化边指导。这是「可选 AI 辅助」的落地形态。</p></div></div>
+            <div class="s ch" data-t="4.5"><div><h4>输入场景与偏好 <span class="ts">00:04</span></h4><p>场景（通勤 / 约会 / 休闲 / 晚宴）、风格、时间预估、难度期望、偏好限制（如「不想用粉底」）、自由补充。用户不必会描述妆容，选一选就行。</p></div></div>
+            <div class="s ch" data-t="9.5"><div><h4>生成妆容 + 自拍试妆 <span class="ts">00:09</span></h4><p>按「用户画像 — 产品库 — 场景风格」三路召回与重排，给出能用现有产品完成的方案；可调用前置相机做自拍试妆预览。</p></div></div>
+            <div class="s ch" data-t="15.5"><div><h4>5 步分步教学 <span class="ts">00:15</span></h4><p>把一个妆拆成 5 步，每步配示范视频、手法与建议，只说这一步该用哪支、怎么涂。这是内测里好评最高的部分。</p></div></div>
+            <div class="s ch" data-t="22.5"><div><h4>完成反馈 → 复盘沉淀 <span class="ts">00:22</span></h4><p>做完后回答「这次顺手吗」并记录备注，保存为复盘沉淀，形成「学 → 做 → 改」的闭环。</p></div></div>
+            <div class="s ch" data-t="26.5"><div><h4>AI 实时视频指导 <span class="ts">00:26</span></h4><p>打开摄像头，AI 看着画面按当前步骤给出提示并识别语音，边化边指导。这是「可选 AI 辅助」的落地形态。</p></div></div>
           </div>
-          <p class="caption">内测版真机录屏（2 分 17 秒，已去除系统状态栏，无声）。点击左侧步骤可跳到对应时间点。后端服务已随项目停止而下线，因此不提供 APK 下载。App 内界面名为 Atelier AI。</p>
+          <p class="caption">精华版真机录屏（41 秒，无声）：六步核心流程。点击左侧步骤可跳到对应片段。后端服务已随项目停止而下线，因此不提供 APK 下载。</p>
+          <details class="fullvid">
+            <summary>看完整版录屏（1 分 42 秒，含 5 步教学与 AI 实时指导全程）</summary>
+            <div class="phone phone-sm">
+              <video id="demoFull" controls playsinline preload="none" poster="poster.jpg"><source src="demo-full.mp4" type="video/mp4">你的浏览器不支持内嵌视频，<a href="demo-full.mp4">点此下载观看</a>。</video>
+            </div>
+            <p class="caption">完整版为一次真实内测操作，去除系统状态栏与声音；AI 实时指导段（真人对镜化妆）已 2 倍速。</p>
+          </details>
         </div>
-      </div>
-    </div>
+          </div>
   </section>
 
   <!-- ===== 截图 ===== -->
