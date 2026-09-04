@@ -41,7 +41,10 @@
   /* 竖屏视频 + 旁白并排 */
   .phone-row{display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:start}
   .phone{background:var(--navy-deep);border-radius:26px;padding:10px;box-shadow:0 14px 34px rgba(28,58,110,.28)}
-  .phone video{display:block;width:100%;height:auto;border-radius:18px;background:#000;aspect-ratio:9/19.5}
+  .phone video{display:block;width:100%;height:auto;border-radius:18px;background:#000}
+  .steps .s.ch{cursor:pointer}
+  .steps .s.ch:hover h4{color:var(--navy)}
+  .steps .ts{font-size:11px;font-weight:600;color:var(--navy);background:var(--navy-soft);border-radius:10px;padding:1px 8px;margin-left:6px;vertical-align:2px}
   .phone .pending{aspect-ratio:9/19.5;border-radius:18px;background:linear-gradient(160deg,#2D5399,#1C3A6E);color:#DCE6F6;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font-size:13px;line-height:1.7}
   .phone .pending b{display:block;color:#fff;font-size:15px;margin-bottom:6px}
   .caption{font-size:12.5px;color:var(--ink-faint);margin-top:10px;line-height:1.6}
@@ -117,7 +120,7 @@
       <span>角色 <b>产品负责人</b>（0→1）</span>
       <span>时间 <b>2026.03 – 2026.06</b></span>
       <span>状态 <b>内测验证完成 · 未上线</b></span>
-      <span>形态 <b>Android App（内测版 APK）</b></span>
+      <span>形态 <b>Android App（内测版 · 界面名 Atelier AI）</b></span>
     </div>
   </header>
 
@@ -127,18 +130,18 @@
       <div class="sec"><span class="n">01 · 真机录屏</span><span class="cat">Walkthrough</span><span class="bar"></span></div>
       <div class="phone-row">
         <div class="phone">
-          <!-- VIDEO_SLOT_START -->
-          <div class="pending"><div><b>录屏整理中</b>内测版真机录屏即将上线</div></div>
-          <!-- VIDEO_SLOT_END -->
+          <video id="demo" controls playsinline preload="metadata" poster="poster.jpg"><source src="demo.mp4" type="video/mp4">你的浏览器不支持内嵌视频，<a href="demo.mp4">点此下载观看</a>。</video>
         </div>
         <div>
           <div class="steps">
-            <div class="s"><div><h4>识别已有化妆品</h4><p>拍照或选择手里的产品，建立「我的化妆包」。推荐从这里出发，锚定用户已经拥有的东西，而不是先卖货。</p></div></div>
-            <div class="s"><div><h4>生成适配妆容</h4><p>按「用户画像 — 产品库 — 场景风格」三路召回与重排，给出能用现有产品完成的妆容方案。</p></div></div>
-            <div class="s"><div><h4>分步骤指导</h4><p>把一个妆拆成可跟做的步骤，每步只说这一步该用哪支、怎么涂。这是内测里好评最高的部分。</p></div></div>
-            <div class="s"><div><h4>完成度反馈</h4><p>做完后给出反馈与下一次的建议，形成「学 → 做 → 改」的闭环，而不是看完教程就结束。</p></div></div>
+            <div class="s ch" data-t="0"><div><h4>识别已有化妆品 <span class="ts">00:00</span></h4><p>拍包装即识别品牌与产品，给出识别摘要、成分分析与致痘致敏提示，确认后入库到「我的化妆台」。推荐从用户已经拥有的东西出发，而不是先卖货。</p></div></div>
+            <div class="s ch" data-t="14"><div><h4>输入场景与偏好 <span class="ts">00:14</span></h4><p>场景（通勤 / 约会 / 休闲 / 晚宴）、风格、时间预估、难度期望、偏好限制（如「不想用粉底」）、自由补充。用户不必会描述妆容，选一选就行。</p></div></div>
+            <div class="s ch" data-t="25"><div><h4>生成妆容 + 自拍试妆 <span class="ts">00:25</span></h4><p>按「用户画像 — 产品库 — 场景风格」三路召回与重排，给出能用现有产品完成的方案；可调用前置相机做自拍试妆预览。</p></div></div>
+            <div class="s ch" data-t="37"><div><h4>5 步分步教学 <span class="ts">00:37</span></h4><p>把一个妆拆成 5 步，每步配示范视频、手法与建议，只说这一步该用哪支、怎么涂。这是内测里好评最高的部分。</p></div></div>
+            <div class="s ch" data-t="54"><div><h4>完成反馈 → 复盘沉淀 <span class="ts">00:54</span></h4><p>做完后回答「这次顺手吗」并记录备注，保存为复盘进入「灵感工坊」，形成「学 → 做 → 改」的闭环。</p></div></div>
+            <div class="s ch" data-t="77"><div><h4>AI 实时视频指导 <span class="ts">01:17</span></h4><p>打开摄像头，AI 看着画面按当前步骤给出提示并识别语音，边化边指导。这是「可选 AI 辅助」的落地形态。</p></div></div>
           </div>
-          <p class="caption">内测期真机录屏。后端服务已随项目停止而下线，因此不提供 APK 下载，仅以录屏与截图呈现。</p>
+          <p class="caption">内测版真机录屏（2 分 17 秒，已去除系统状态栏，无声）。点击左侧步骤可跳到对应时间点。后端服务已随项目停止而下线，因此不提供 APK 下载。App 内界面名为 Atelier AI。</p>
         </div>
       </div>
     </div>
@@ -149,11 +152,12 @@
     <div class="wrap">
       <div class="sec"><span class="n">02 · 界面</span><span class="cat">Screens</span><span class="bar"></span></div>
       <div class="shots">
-        <!-- SHOTS_SLOT_START -->
-        <figure><div class="ph">截图 1<br>识别化妆品</div><figcaption><b>识别已有化妆品。</b>建立个人化妆包。</figcaption></figure>
-        <figure><div class="ph">截图 2<br>妆容推荐</div><figcaption><b>妆容推荐。</b>只推荐手里产品能完成的方案。</figcaption></figure>
-        <figure><div class="ph">截图 3<br>分步教学</div><figcaption><b>分步教学。</b>一步一支产品、一个动作。</figcaption></figure>
-        <!-- SHOTS_SLOT_END -->
+        <figure><img src="m1.jpg" alt="识别化妆品" loading="lazy"><figcaption><b>识别已有化妆品。</b>识别摘要 + 成分分析，标出致痘、致敏风险，确认后入库。</figcaption></figure>
+        <figure><img src="m2.jpg" alt="我的化妆台" loading="lazy"><figcaption><b>我的化妆台。</b>用户已有产品的数字化妆包，带风险等级与开封时间。推荐都从这里出发。</figcaption></figure>
+        <figure><img src="m3.jpg" alt="场景与风格输入" loading="lazy"><figcaption><b>输入场景与偏好。</b>选场景、风格、难度和限制，不用会描述妆容。</figcaption></figure>
+        <figure><img src="m4.jpg" alt="妆容预览与自拍试妆" loading="lazy"><figcaption><b>妆容预览。</b>推荐方案 + 模板妆效 + 自拍试妆预览，确认后开始跟妆。</figcaption></figure>
+        <figure><img src="m5.jpg" alt="分步教学" loading="lazy"><figcaption><b>5 步分步教学。</b>第 4 步「腮红与轮廓」：示范视频 + 手法 + 建议，上一步 / 下一步。</figcaption></figure>
+        <figure><img src="m6.jpg" alt="AI 实时视频指导" loading="lazy"><figcaption><b>AI 实时视频指导。</b>摄像头实时画面，按当前步骤提示并识别语音。</figcaption></figure>
       </div>
     </div>
   </section>
@@ -224,5 +228,8 @@
     <p class="note">马天宇 · 重庆大学软件工程 · AI 产品经理 · 2027 届</p>
   </footer>
 </div>
+<script>
+  document.querySelectorAll('.steps .ch').forEach(el=>el.addEventListener('click',()=>{const v=document.getElementById('demo');v.currentTime=Number(el.dataset.t)||0;v.play();v.scrollIntoView({behavior:'smooth',block:'center'});}));
+</script>
 </body>
 </html>
