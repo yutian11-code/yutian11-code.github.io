@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>数据验证 · MMU 内测报告 · 马天宇</title>
+<meta name="description" content="MMU 150 人内测报告：PMF 验证、转化漏斗与商业化潜力">
+<style>
+  :root{--navy:#244884;--navy-deep:#1C3A6E;--navy-soft:#E7ECF5;--navy-tint:#F3F6FB;--ink:#1F2733;--ink-soft:#3C4757;--ink-faint:#7C8797;--paper:#fff;--bg:#EBEEF3;--line:#DEE4EC;--warn:#B4541A}
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:"PingFang SC","Noto Sans SC","Noto Sans CJK SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;line-height:1.75}
+  a{color:var(--navy);text-decoration:none} a:hover{text-decoration:underline}
+  .sheet{max-width:860px;margin:0 auto;background:var(--paper);box-shadow:0 6px 40px rgba(31,39,51,.12)}
+  .topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 40px;border-bottom:1px solid var(--line);font-size:13px;position:sticky;top:0;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);z-index:5}
+  .topbar .crumb{color:var(--ink-faint)} .topbar .crumb b{color:var(--ink);font-weight:700}
+  .topbar .back{font-weight:600;white-space:nowrap}
+  .hero{background:var(--navy);color:#fff;padding:38px 40px 30px}
+  .hero .eyebrow{font-size:11px;letter-spacing:.24em;color:#AEC2E4;font-weight:700;text-transform:uppercase;margin:0 0 12px}
+  .hero h1{font-size:29px;font-weight:800;margin:0 0 12px;line-height:1.3}
+  .hero .meta{display:flex;flex-wrap:wrap;gap:8px 10px;margin:0 0 14px}
+  .hero .meta span{font-size:12px;color:#DCE6F6;border:1px solid rgba(255,255,255,.28);border-radius:20px;padding:3px 12px}
+  .hero .note{font-size:13px;color:#CBD9EF;margin:0;line-height:1.7}
+  .banner{background:var(--navy-tint);border-bottom:1px solid var(--line);padding:11px 40px;font-size:12.5px;color:var(--ink-soft)}
+  .banner b{color:var(--navy-deep)}
+  .doc{padding:30px 40px 48px}
+  .doc h1{font-size:23px;font-weight:800;margin:30px 0 12px;line-height:1.35;border-bottom:2px solid var(--navy-soft);padding-bottom:8px}
+  .doc h2{font-size:19px;font-weight:800;color:var(--navy);margin:28px 0 10px;line-height:1.4}
+  .doc h3{font-size:16px;font-weight:700;margin:22px 0 8px}
+  .doc h4{font-size:14.5px;font-weight:700;color:var(--ink-soft);margin:18px 0 6px}
+  .doc p{font-size:14.5px;color:var(--ink-soft);line-height:1.85;margin:0 0 12px;text-wrap:pretty}
+  .doc strong,.doc b{color:var(--ink);font-weight:700}
+  .doc ul,.doc ol{font-size:14.5px;color:var(--ink-soft);line-height:1.8;margin:0 0 12px;padding-left:22px}
+  .doc li{margin-bottom:5px}
+  .doc blockquote{margin:0 0 14px;padding:10px 16px;background:var(--navy-tint);border-left:3px solid var(--navy);border-radius:0 8px 8px 0;color:var(--ink-soft);font-size:13.5px}
+  .doc blockquote p{margin:0}
+  .doc code{background:var(--navy-soft);border-radius:4px;padding:1px 5px;font-size:.9em;font-family:"SFMono-Regular",Consolas,monospace}
+  .doc pre{background:#0F1B33;color:#E4ECF8;border-radius:8px;padding:14px 16px;overflow-x:auto;font-size:12.5px;line-height:1.6;margin:0 0 14px}
+  .doc pre code{background:none;padding:0;color:inherit}
+  .doc pre.mermaid{background:var(--navy-tint);color:var(--ink);text-align:center;padding:18px}
+  .doc hr{border:0;border-top:1px solid var(--line);margin:24px 0}
+  .tw{overflow-x:auto;margin:0 0 16px;border:1px solid var(--line);border-radius:8px}
+  .doc table{border-collapse:collapse;width:100%;font-size:13px;min-width:520px}
+  .doc th,.doc td{padding:8px 12px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);text-align:left;vertical-align:top;line-height:1.6}
+  .doc th{background:var(--navy-tint);font-weight:700;color:var(--navy-deep);white-space:nowrap}
+  .doc tr:last-child td{border-bottom:0} .doc th:last-child,.doc td:last-child{border-right:0}
+  .foot{background:var(--navy);color:#fff;padding:26px 40px;text-align:center}
+  .foot p{margin:0 0 12px;font-size:13px;color:#CBD9EF}
+  .foot a{color:#E4ECF8;border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:5px 16px;font-size:13px;margin:0 4px;display:inline-block}
+  @media (max-width:680px){
+    .topbar,.hero,.banner,.doc,.foot{padding-left:18px;padding-right:18px}
+    .hero h1{font-size:23px} .doc h1{font-size:20px} .doc h2{font-size:17px}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="topbar"><span class="crumb"><b>马天宇</b> · 产品经理基本功 / 数据验证与复盘</span><a class="back" href="../#skills">← 返回作品集</a></div>
+  <header class="hero">
+    <p class="eyebrow">Data Validation</p>
+    <h1>MMU 内测报告：150 人种子用户的 PMF 与商业化验证</h1>
+    <div class="meta"><span>产品 MMU</span><span>类型 内测复盘</span><span>150 用户 · 128 问卷</span></div>
+    <p class="note">用行为埋点 + 问卷把「结构化教学交付」的定位假设量化验证：PMF 信号、核心转化漏斗、功能好评、定价与商业模式测试。</p>
+  </header>
+  <div class="banner">📄 <b>真实工作文档</b>，直接取自项目过程，仅做排版渲染、未为作品集重新包装。 原文为团队内部 Word 报告，此处按原结构渲染。</div>
+  <div class="doc">
+<p>MMU APP内测报告</p>
+<p>基于 150 名深度种子用户的行为数据与商业化潜力评估</p>
+<p>测试周期：2026年5月20日 — 5月29日
+样本规模：150 名深度内测用户（全量行为埋点追踪） + 128 份有效深度反馈问卷</p>
+<h2>执行摘要</h2>
+<p>本次内测的核心目的是验证 “用自己的化妆品，跟着AI一步步化出好看妆容” 这一核心理念的市场接受度。数据表明，MMU 已成功跨越早期的 PMF（产品市场契合度）门槛：</p>
+<p>理念大获认可：89.06% 的种子用户表示愿意向他人推荐，核心场景启动率高达 71.89%，证明“降低化妆门槛、盘活现有化妆品”是极具爆发力的刚需。</p>
+<p>核心壁垒初现：“分步教学”功能获得 92.19% 的极高好评率，成为当前最强的用户留存抓手。</p>
+<p>商业化路径清晰：用户对“电商折扣+高级定制”的会员权益展现出强烈付费意愿，验证了 “SaaS订阅+美妆电商CPS” 的双轮驱动商业模式。</p>
+<h2>二、PMF 验证</h2>
+<p>本次150名种子用户的招募对齐了我们锁定的核心目标市场。数据验证了我们对用户画像及痛点的精准预判，这是一个基数庞大且付费意愿强烈的蓝海市场。</p>
+<h3>2.1 核心用户画像与市场分布</h3>
+<div class="tw"><table><tr><th>细分群体</th><th>占比</th><th>地域分布</th><th>核心特征与消费能力</th></tr><tr><td>一二线城市白领</td><td>52.0%</td><td>北上广深、新一线</td><td>25-45 岁，月收入 8k-20k。人均拥有 23 件美妆产品，37% 拥有超 5 件未开封产品。具备极强的消费能力与复购潜力。</td></tr><tr><td>下沉市场女性</td><td>34.7%</td><td>三四线城市及县城</td><td>18-30 岁，月收入 3k-8k。人均拥有 12 件美妆产品。处于美妆消费觉醒期，对“性价比”和“实用性”极度敏感。</td></tr><tr><td>学生群体</td><td>10.2%</td><td>全国高校</td><td>18-24 岁，月生活费 1.5k-3k。人均拥有 8 件美妆产品。时间充裕，乐于尝鲜，是产品口碑裂变的核心引擎。</td></tr><tr><td>其他群体</td><td>3.1%</td><td>一二线城市为主</td><td>18-45 岁，长尾补充。</td></tr></table></div>
+<h3>2.2 核心痛点验证：产品完美契合真实需求</h3>
+<p>通过对上述画像的深度调研，我们发现用户最大的痛点并非“没有好产品”，而是 “买了不会用、用时找不到、教程不匹配”。MMU 的核心功能精准击破了这些痛点：</p>
+<p>白领群体痛点：“早上时间紧张找不到产品、经常重复购买、教程产品不匹配”。</p>
+<p>·MMU 解决方案：数字化妆台（85.16% 用户认可分类清晰）+ AI 妆容匹配（基于现有产品生成妆容），彻底盘活闲置资产，杜绝重复购买。</p>
+<p>下沉市场痛点：“化妆技术差，不知道怎么用现有产品、容易冲动购买”。</p>
+<p>·MMU 解决方案：分步教学功能（92.19% 好评率），手把手教用户用好手头产品，用“教学交付”替代“盲目种草”。</p>
+<p>学生群体痛点：“预算有限买了不会用、不知道不同场合该化什么妆”。</p>
+<p>·MMU 解决方案：场景化妆容推荐（通勤/约会/面试），在有限预算内实现妆容效果最大化。</p>
+<h2>三、 产品表现</h2>
+<h3>3.1 核心功能表现：长板极长，抓手明确</h3>
+<p>分步教学功能：92.19% 的用户认为有帮助。这证明我们的内容拆解逻辑已完全跑通，具备极强的规模化复制能力，是留住“下沉市场”与“学生”群体的核心利器。</p>
+<p>数字化妆台管理：成功帮助用户建立了“数字资产”意识。白领用户人均录入产品数显著高于平均水平，为后续的“空瓶复购提醒”和“保质期营销”打下坚实的数据基础。</p>
+<h3>3.2 核心转化漏斗：前端极具吸引力，后端优化空间巨大</h3>
+<p>基于150 名用户的真实行为埋点（累计产生超1500次核心交互）：</p>
+<p>[推荐入口曝光] 1,520次</p>
+<p>↓</p>
+<p>[推荐入口点击] 1,085次</p>
+<p>↓(点击率71.38%，用户探索欲强)</p>
+<p>[跟妆启动] 780次</p>
+<p>↓(启动率 71.89%，验证了核心场景的强吸引力)</p>
+<p>[完整跟妆完成] 189 次</p>
+<p>(完成率 24.23%，受限于当前AI渲染时长与单次视频过长，流失较多)</p>
+<h3>71.89% 的超高启动率是本次内测最大的亮点，证明用户一旦看到心仪的妆容，立刻动手尝试的意愿极强。后端 24.23% 的完成率并非需求伪命题，而是受限于当前 MVP 版本的工程体验。通过引入“断点续做”和“视频切片”技术，该漏斗的转化率预计可提升 2-3 倍。</h3>
+<h2>四、商业化潜力验证</h2>
+<h3>4.1 付费意愿与权益偏好</h3>
+<div class="tw"><table><tr><th>会员权益吸引力排名</th><th>占比</th><th>商业模式映射</th></tr><tr><td>电商购物专属折扣</td><td>66.40%</td><td>美妆电商 CPS / 品牌广告（白领与下沉用户极度渴望通过平台获得供应链价格优势）</td></tr><tr><td>高级定制妆容</td><td>59.38%</td><td>SaaS 增值订阅（为高阶/场景化 AI 算法付费）</td></tr><tr><td>AI 实时跟妆指导</td><td>36.71%</td><td>核心工具属性溢价</td></tr></table></div>
+<h3>4.2 定价策略测试</h3>
+<h3>19.9 元以下：70.31%</h3>
+<h3>19.9 - 29.9 元：29.69%</h3>
+<h3>29.9 元以上：0%</h3>
+<p>在月费定价测试中，用户的价格接受区间高度集中于轻量级订阅档位。其中，70.31% 的用户选择 19.9 元以下，29.69% 的用户选择 19.9-29.9 元，而 29.9 元以上占比为 0%。这表明目标用户对价格较为敏感，但也形成了非常清晰的付费价格锚点：产品更适合以低门槛、高频使用、高性价比的订阅方式切入。</p>
+<p>从乐观角度看，接近三成用户能够接受 19.9-29.9 元/月，说明在核心功能具备足够价值感的情况下，产品存在向中档会员转化的空间。而 70.31% 用户选择 19.9 元以下，则说明低价会员档具备更大的规模化转化潜力，适合作为商业化起步阶段的主力价格带。</p>
+<h2>五、 技术压测与产品核心优化路线</h2>
+<p>在本次 150 人的内测中，团队主动进行了高强度的极限压测，提前暴露了底层架构的瓶颈，并已制定明确的优化计划。</p>
+<p>阶段一：底层重构与体验闭环</p>
+<div class="tw"><table><tr><th>压测发现的问题</th><th>团队洞察与重构方案 (技术壁垒构建)</th></tr><tr><td>AI 妆容“千人一面”
+(55.56% 用户反馈不够个性化)</td><td>洞察：基础模型缺乏对亚洲人面部骨骼和肤质纹理的精细适配。
+方案：引入Face Landmark 微调算法，结合用户五官比例进行“骨相级”妆容贴合；增加场景化 Prompt 预设，彻底解决“假面感”。</td></tr><tr><td>跟妆流程中断
+(完成率 24.29%)</td><td>洞察：单次视频过长，新手跟不上节奏导致挫败感。
+方案：重构播放器，支持视频自动分节、语音控制暂停/回放；增加“进度保存”与“新手慢速模式”。</td></tr></table></div>
+<p>阶段二：生态扩充与商业化接入</p>
+<div class="tw"><table><tr><th>演进方向</th><th>具体措施与商业价值</th></tr><tr><td>数字化妆台 2.0</td><td>扩充小众/海外品牌 SKU 库；上线 “成分分析与空瓶预警”，直接打通电商复购链路（核心变现阶段）。</td></tr><tr><td>新手引导与肤质测试</td><td>增加“AI 肤质检测 -&gt; 护肤建议 -&gt; 妆容推荐”一条龙服务，提升新用户首日留存率。</td></tr><tr><td>内容社区</td><td>鼓励熟练级用户上传 DIY 妆容模板，建立UGC内容飞轮。</td></tr></table></div>
+<h2>六、结论</h2>
+<p>赛道切入精准，PMF 已获验证：
+“用自己的化妆品学化妆”切中了美妆市场“重销售、轻交付（教学）”的痛点。89.06% 的超高推荐意愿和 71.89% 的场景启动率，证明 MMU 具备极强的自发传播潜力和极低的获客成本预期。</p>
+<p>目标市场庞大且极具商业价值：
+我们精准锁定了占比 52.0% 的一二线白领与34.7% 的下沉市场女性。前者拥有高消费力与庞大的“闲置美妆资产”，后者拥有强烈的“技能学习渴望”。MMU 完美承接了这两大群体的核心痛点。</p>
+<p>商业化想象力巨大：
+我们不仅是一个SaaS工具，更是一个精准的美妆流量分发枢纽。通过“数字化妆台”掌握用户的真实资产（拥有什么、缺什么、什么快过期了），MMU 能够实现极高转化率的美妆电商精准导购，打破纯工具产品的变现天花板。</p>
+<p>团队具备极强的技术掌控力与迭代执行力：
+通过 150 人的深度压测，团队已彻底摸清 AI 美妆渲染的底层技术深水区，并制定了切实可行的架构升级方案。当前的“不完美”正是我们建立更高技术门槛的垫脚石。</p>
+  </div>
+  <footer class="foot">
+    <p>这是我在做产品时沉淀的方法论文档之一。</p>
+    <a href="../">作品集首页</a><a href="../#skills">更多基本功文档</a>
+  </footer>
+</div>
+
+</body>
+</html>

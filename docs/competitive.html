@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>竞品分析 · 美妆 AI 跨赛道 27 款竞品 · 马天宇</title>
+<meta name="description" content="MMU 美妆 AI 跨赛道 27 款竞品调研与三条冷启动铁律">
+<style>
+  :root{--navy:#244884;--navy-deep:#1C3A6E;--navy-soft:#E7ECF5;--navy-tint:#F3F6FB;--ink:#1F2733;--ink-soft:#3C4757;--ink-faint:#7C8797;--paper:#fff;--bg:#EBEEF3;--line:#DEE4EC;--warn:#B4541A}
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:"PingFang SC","Noto Sans SC","Noto Sans CJK SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;line-height:1.75}
+  a{color:var(--navy);text-decoration:none} a:hover{text-decoration:underline}
+  .sheet{max-width:860px;margin:0 auto;background:var(--paper);box-shadow:0 6px 40px rgba(31,39,51,.12)}
+  .topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 40px;border-bottom:1px solid var(--line);font-size:13px;position:sticky;top:0;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);z-index:5}
+  .topbar .crumb{color:var(--ink-faint)} .topbar .crumb b{color:var(--ink);font-weight:700}
+  .topbar .back{font-weight:600;white-space:nowrap}
+  .hero{background:var(--navy);color:#fff;padding:38px 40px 30px}
+  .hero .eyebrow{font-size:11px;letter-spacing:.24em;color:#AEC2E4;font-weight:700;text-transform:uppercase;margin:0 0 12px}
+  .hero h1{font-size:29px;font-weight:800;margin:0 0 12px;line-height:1.3}
+  .hero .meta{display:flex;flex-wrap:wrap;gap:8px 10px;margin:0 0 14px}
+  .hero .meta span{font-size:12px;color:#DCE6F6;border:1px solid rgba(255,255,255,.28);border-radius:20px;padding:3px 12px}
+  .hero .note{font-size:13px;color:#CBD9EF;margin:0;line-height:1.7}
+  .banner{background:var(--navy-tint);border-bottom:1px solid var(--line);padding:11px 40px;font-size:12.5px;color:var(--ink-soft)}
+  .banner b{color:var(--navy-deep)}
+  .doc{padding:30px 40px 48px}
+  .doc h1{font-size:23px;font-weight:800;margin:30px 0 12px;line-height:1.35;border-bottom:2px solid var(--navy-soft);padding-bottom:8px}
+  .doc h2{font-size:19px;font-weight:800;color:var(--navy);margin:28px 0 10px;line-height:1.4}
+  .doc h3{font-size:16px;font-weight:700;margin:22px 0 8px}
+  .doc h4{font-size:14.5px;font-weight:700;color:var(--ink-soft);margin:18px 0 6px}
+  .doc p{font-size:14.5px;color:var(--ink-soft);line-height:1.85;margin:0 0 12px;text-wrap:pretty}
+  .doc strong,.doc b{color:var(--ink);font-weight:700}
+  .doc ul,.doc ol{font-size:14.5px;color:var(--ink-soft);line-height:1.8;margin:0 0 12px;padding-left:22px}
+  .doc li{margin-bottom:5px}
+  .doc blockquote{margin:0 0 14px;padding:10px 16px;background:var(--navy-tint);border-left:3px solid var(--navy);border-radius:0 8px 8px 0;color:var(--ink-soft);font-size:13.5px}
+  .doc blockquote p{margin:0}
+  .doc code{background:var(--navy-soft);border-radius:4px;padding:1px 5px;font-size:.9em;font-family:"SFMono-Regular",Consolas,monospace}
+  .doc pre{background:#0F1B33;color:#E4ECF8;border-radius:8px;padding:14px 16px;overflow-x:auto;font-size:12.5px;line-height:1.6;margin:0 0 14px}
+  .doc pre code{background:none;padding:0;color:inherit}
+  .doc pre.mermaid{background:var(--navy-tint);color:var(--ink);text-align:center;padding:18px}
+  .doc hr{border:0;border-top:1px solid var(--line);margin:24px 0}
+  .tw{overflow-x:auto;margin:0 0 16px;border:1px solid var(--line);border-radius:8px}
+  .doc table{border-collapse:collapse;width:100%;font-size:13px;min-width:520px}
+  .doc th,.doc td{padding:8px 12px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);text-align:left;vertical-align:top;line-height:1.6}
+  .doc th{background:var(--navy-tint);font-weight:700;color:var(--navy-deep);white-space:nowrap}
+  .doc tr:last-child td{border-bottom:0} .doc th:last-child,.doc td:last-child{border-right:0}
+  .foot{background:var(--navy);color:#fff;padding:26px 40px;text-align:center}
+  .foot p{margin:0 0 12px;font-size:13px;color:#CBD9EF}
+  .foot a{color:#E4ECF8;border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:5px 16px;font-size:13px;margin:0 4px;display:inline-block}
+  @media (max-width:680px){
+    .topbar,.hero,.banner,.doc,.foot{padding-left:18px;padding-right:18px}
+    .hero h1{font-size:23px} .doc h1{font-size:20px} .doc h2{font-size:17px}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="topbar"><span class="crumb"><b>马天宇</b> · 产品经理基本功 / 竞品分析</span><a class="back" href="../#skills">← 返回作品集</a></div>
+  <header class="hero">
+    <p class="eyebrow">Competitive Analysis</p>
+    <h1>跨赛道 27 款竞品调研，提炼三条冷启动铁律</h1>
+    <div class="meta"><span>产品 MMU</span><span>类型 竞品分析</span><span>2026.06</span></div>
+    <p class="note">为 MMU 第一炮做的竞品弹药库：只看被市场验证成功、且吸引人的功能，拆出成功证据、留存机制、变现方式，反推自己该做什么、不该做什么。</p>
+  </header>
+  <div class="banner">📄 <b>真实工作文档</b>，直接取自项目过程，仅做排版渲染、未为作品集重新包装。</div>
+  <div class="doc">
+<h1>MMU 竞品功能菜单 + 五大功能设计</h1>
+<ul>
+<li>用途：给决策者（大哥）的弹药库 —— <strong>只看被市场验证成功过、且吸引人的功能</strong>，并据此设计 MMU 第一炮的 5 个功能</li>
+<li>前提约束（贯穿）：<strong>第一版不带产品库、不做化妆台/录入；要能快速便宜验证"功能招不招用户"；留存 &gt; 日活</strong></li>
+<li>配套阅读：《三版闭环功能设计》《妆签 MVP 功能列表》《获客钩子候选设计思路》</li>
+</ul>
+<hr />
+<h2>一、三条铁律（27 个 App 跨赛道调研，结论高度一致）</h2>
+<ol>
+<li>
+<p><strong>"AI 出一张以用户本人为主角的可分享卡片" = 被反复验证的冷启动核弹。</strong>
+   妙鸭 18 天冲 App Store 下载榜第一、单日收入 55 万元；Lensa 上线 5 天收入 820 万美元；Remini 登顶 App Store（超过 Threads）；个人色彩 <code>#coloranalysis</code> 播放 7.5 亿次；新氧魔镜测脸累计用了 2.5 亿次。<strong>这条路完全跑得通。</strong></p>
+</li>
+<li>
+<p><strong>纯一次性卡片必死 —— 留存是生死线。</strong>
+   妙鸭日活从 60 万跌到 3.6 万、收入跌 92%、团队解散；Lensa/ZAO 一夜断崖；Dressika 只能靠 TikTok 不停灌新用户续命。<strong>第一天就要解决"为什么回来"。</strong></p>
+</li>
+<li>
+<p><strong>"不带化妆台/录入"的判断是对的 —— 不只是因为没库，是这模式本身留存差。</strong>
+   化妆台/保质期/录入被独立验证为"录入劝退 × 低频 = 留存陷阱"：BeautiStics 上线多年仅 25 条评价；微信侧根本没跑出量级的个人化妆台小程序。</p>
+</li>
+</ol>
+<hr />
+<h2>二、竞品主表（按赛道分组）</h2>
+<h3>赛道 1 · AI 试妆 / AR 试妆 / AI 测肤（中国）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>App</th>
+<th>核心功能</th>
+<th>留存机制</th>
+<th>变现</th>
+<th>成功证据</th>
+<th>吃库</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>美图秀秀</td>
+<td>AI 写真/动漫、一键妆容模板、AI 测肤</td>
+<td>模板上新 + 订阅</td>
+<td>订阅 + B 端 SaaS</td>
+<td>全球 MAU 2.66 亿、付费订阅 1261 万、2024 营收 33.4 亿</td>
+<td>🟡</td>
+</tr>
+<tr>
+<td>美颜相机</td>
+<td>质感妆容套装、AI 写真、3D 微调</td>
+<td>妆容贴纸高频上新</td>
+<td>订阅</td>
+<td>曾登顶中国区总榜第一；约 200 万下载/月</td>
+<td>🟡</td>
+</tr>
+<tr>
+<td>玩美彩妆(YouCam)</td>
+<td>口红/眼影 AR 真实色号试色、AI 测肤</td>
+<td>订阅解锁色号</td>
+<td>订阅 + B2B 试妆 SaaS</td>
+<td>母公司 NYSE:PERF 上市、矩阵下载 5 亿+、付费订阅 100 万+</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>天天 P 图</td>
+<td>自然美妆、魔法换装爆款卡</td>
+<td>节日爆款回流</td>
+<td>广告 + 品牌合作</td>
+<td>曾登多国 App Store 总榜第一</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>轻颜相机</td>
+<td>妆容"拍同款"、姿势指导</td>
+<td>拍同款 + 模板上新</td>
+<td>订阅 + 广告</td>
+<td>字节系、上线初期霸榜</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>你今天真好看</td>
+<td>AI 测肤 7 项评分卡、肤质趋势记录</td>
+<td><strong>趋势曲线 = 定期回来测</strong></td>
+<td>护肤导购</td>
+<td>累计下载 1000 万+</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>新氧魔镜测脸</td>
+<td>五官比例/脸型评分卡、模拟整形</td>
+<td>颜值卡是社交货币</td>
+<td>医美导流</td>
+<td>新氧纳斯达克上市；魔镜累计用 2.5 亿次、超 1000 万人测</td>
+<td>🟡</td>
+</tr>
+<tr>
+<td>妙鸭相机</td>
+<td>上传照片训练分身、9.9 元出整组写真</td>
+<td>（反面教材：无复访）</td>
+<td>单次付费 9.9 元</td>
+<td>下载超 500 万、单日收入峰值 55 万</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table></div>
+<h3>赛道 2 · AI 换装 / AI 写真 / 换脸（爆款）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>App</th>
+<th>核心功能</th>
+<th>留存</th>
+<th>变现</th>
+<th>成功证据</th>
+<th>吃库</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>妙鸭相机</td>
+<td>9.9 元 AI 写真分身</td>
+<td>一次性（月活月抛）</td>
+<td>单次付费</td>
+<td>峰值日活 60 万→跌到 3.6 万、收入跌 92%、团队解散</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Lensa AI</td>
+<td>Magic Avatars 艺术头像</td>
+<td>强一次性 fad</td>
+<td>单次 $3.99 起</td>
+<td>2022/12 月下载 1930 万、头 5 天收入 820 万美元</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Remini</td>
+<td>AI 高清修复 + AI 写真头像</td>
+<td>病毒拉新、订阅留存难</td>
+<td>订阅 ~$9.99/周</td>
+<td>2023/7 登顶 App Store、两周下载 4000 万、日活峰值 2000 万+</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>星绘</td>
+<td>抖音版 AI 分身写真</td>
+<td>偏一次性玩具</td>
+<td>免费（抖音灌量）</td>
+<td>字节 100% 控股</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>FaceApp</td>
+<td>变老/变性别滤镜</td>
+<td>周期性 meme 翻红</td>
+<td>订阅 $60/年</td>
+<td>2019 在 121 国登顶、累计下载约 4.8 亿</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>ZAO</td>
+<td>一键换脸进影视片段</td>
+<td>极端一次性 + 隐私爆雷</td>
+<td>未及变现即被叫停</td>
+<td>&lt;24 小时冲免费榜第 2、被工信部约谈</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>裂变公式：<strong>"我的脸/我的样子 + AI 戏剧化变身 = 忍不住晒"</strong>；产出天然适配信息流，别人看了也想试 → 闭环。
+隐私高压线：涉及上传人脸，授权条款别贪（ZAO/妙鸭反面教材）。</p>
+</blockquote>
+<h3>赛道 3 · 个人色彩 / 季型 + 美妆管理 + 种草社区</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>App</th>
+<th>核心功能</th>
+<th>留存</th>
+<th>变现</th>
+<th>成功证据</th>
+<th>吃库</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Zamface(韩)</td>
+<td>AI 测色彩/肤质 → 接视频+逛货+社区</td>
+<td>诊断当入口接平台</td>
+<td>导购 + 广告</td>
+<td>350 万用户、融资约 110 亿韩元</td>
+<td>🟡→✅</td>
+</tr>
+<tr>
+<td>Dressika</td>
+<td>自拍 30 秒出季型色卡</td>
+<td>基本一次性（靠 TikTok 灌新）</td>
+<td>付费报告 $4.49–40</td>
+<td>650 万下载、月流水约 13 万美元、美妆榜 #4</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>ColorWise</td>
+<td>摄像头虚拟挂布比色找季型</td>
+<td>购物伴侣（复访弱）</td>
+<td>$14.99 买断</td>
+<td>100 万+下载、4.6–4.7★</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>美丽修行</td>
+<td>查成分/真伪 + 梳妆台(拍照识别)</td>
+<td>查成分=买前刚需（高频）</td>
+<td>广告/派样/导流</td>
+<td>4000 万+用户</td>
+<td>✅(官方库)</td>
+</tr>
+<tr>
+<td>查妆妆</td>
+<td>批号 OCR 算保质期</td>
+<td>管理模块复访弱</td>
+<td>会员</td>
+<td>App Store 4.8★/1169 评</td>
+<td>🟡</td>
+</tr>
+<tr>
+<td>BeautiStics</td>
+<td>手动建库+保质期提醒</td>
+<td>天生低频（反面教材）</td>
+<td>订阅 $2.99/月</td>
+<td>美区 4.4★仅 25 评</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>小红书美妆</td>
+<td>UGC 笔记 + 搜索决策 + 商城</td>
+<td><strong>内容+搜索双核（最健康）</strong></td>
+<td>广告 + 电商</td>
+<td>MAU 3.5 亿+</td>
+<td>🟡</td>
+</tr>
+<tr>
+<td>完美日记</td>
+<td>私域+小程序+社群 DTC</td>
+<td>社交/运营留存（极烧钱）</td>
+<td>卖自家货</td>
+<td>私域约 500 万粉；2023 营收 34.1 亿仍净亏 7.5 亿</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>个人色彩关键结论：<strong>爱玩、爱晒、愿付费三条全验证为真</strong>（线下 19.9 元~数千元仍火爆，SHISPACE 半年卖 1000+ 套≈138 万元）；<strong>但中国没跑出独立爆款小程序 = 空位</strong>。纯诊断必然一次性，做大的玩家都把身份卡当入口、后面接工具/社区/电商续命。</p>
+</blockquote>
+<h3>赛道 4 · 海外头部美妆 App（功能天花板 + 变现范式）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>App</th>
+<th>核心功能</th>
+<th>留存机制</th>
+<th>变现</th>
+<th>成功证据</th>
+<th>吃库</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>YouCam Makeup</td>
+<td>AR 试妆 + AI 测肤 15 项 + AI 美妆顾问</td>
+<td>工具高频 + 订阅</td>
+<td>C 端订阅</td>
+<td>全家桶 11 亿+下载、3 亿用户、付费 ~90 万</td>
+<td>🟡</td>
+</tr>
+<tr>
+<td>Perfect Corp(B2B)</td>
+<td>给品牌嵌 AR 试妆 SDK</td>
+<td>SaaS 续约</td>
+<td>B2B SaaS + C 端订阅</td>
+<td>NYSE:PERF；801 品牌客户、89 万 SKU</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Sephora</td>
+<td>Virtual Artist AR + 会员 + 游戏化挑战</td>
+<td><strong>会员 + 挑战（参与度+47%）</strong></td>
+<td>自营电商 + 会员</td>
+<td>Beauty Insider 4600 万会员占年销 80%</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Ulta</td>
+<td>积分进度条 + GLAMlab AR</td>
+<td><strong>积分进度条</strong></td>
+<td>自营电商 + 积分</td>
+<td>4400 万会员占营收 95%、App 180 万评 4.9★</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>L'Oréal ModiFace</td>
+<td>AR 试色 + AI 皮肤诊断引擎</td>
+<td>提转化/降退货</td>
+<td>赋能集团电商</td>
+<td>2023 年 1 亿次数字试妆</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Madison Reed</td>
+<td>在家染发订阅</td>
+<td>刚需复购（每月补根）</td>
+<td>自营 + 订阅</td>
+<td>经常性收入约 70%</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>留存被验证有效（强→弱）：①会员积分等级（最硬，但绑电商）②<strong>游戏化挑战/进度条（轻、可独立，最适合小程序）</strong> ③刚需品类订阅 ④AR/测肤工具高频 ⑤纯内容社区＝被证伪（Supergreat 关停）。
+AR 真实色号 ROI 被反复验证（转化+90%、退货-64%），<strong>但重度吃 89 万级 SKU 库 = 重资产护城河，冷启动别碰</strong>。YouCam 证明：早期拉新可不绑真实库，用 AI 报告卡/通用妆容裂变即可，真实色号库是后期变现才接。</p>
+</blockquote>
+<hr />
+<h2>三、功能菜单（按"拉新 / 留存 / 变现"，标注验证 + 吃库）</h2>
+<h3>拉新钩子（出可分享卡片，全部 ❌ 不吃库）</h3>
+<ul>
+<li>测脸/测肤评分报告卡 —— 新氧 2.5 亿次、你今天真好看 1000 万+下载</li>
+<li>个人色彩/季型身份卡 —— 全球 7.5 亿播放、Dressika 650 万下载、中国小程序空位</li>
+<li>AI 妆容"拍同款"模板卡 —— 轻颜日均 60 分钟+</li>
+<li>戏剧化反差产出（素人→定制妆效前后对比）—— FaceApp 4.8 亿下载</li>
+</ul>
+<h3>留存机制（几乎不吃库）</h3>
+<ul>
+<li>趋势记录 / 定期复测 —— 你今天真好看趋势曲线</li>
+<li>游戏化挑战 + 进度条 / 打卡 —— Sephora 挑战 +47%、Ulta 进度条</li>
+<li>诊断当入口 → 后接内容/推荐/社区 —— Zamface 350 万用户</li>
+<li>工具型内容 + 搜索 —— 小红书 MAU 3.5 亿</li>
+</ul>
+<h3>变现（早期轻，重的留到有体量）</h3>
+<ul>
+<li>美妆导购佣金（卡片接产品种草）—— 测肤用户转化 3–5 倍（NielsenIQ×美图）</li>
+<li>一次性/轻付费解锁深度报告 —— 个人色彩 $4.49–40</li>
+<li>⚠️ 真实品牌色号 AR 库 / B2B SaaS —— Perfect 89 万 SKU，<strong>冷启动别碰</strong></li>
+<li>⚠️ 自营电商 / 自营 SKU —— 2024–26 多家下滑，红海</li>
+</ul>
+<hr />
+<h2>四、五大功能设计（被验证 + 吸引人 + 不吃库；合起来是一条闭环）</h2>
+<blockquote>
+<p>选取标准：① 有成功 App 用真金白银验证过；② 自带社交货币/吸引力；③ 不吃产品库（或仅需手工种子清单）；④ 第一版能用"手工出卡"快速验证。
+闭环关系：<strong>①获客 → ②裂变 → ③④回流留存 → ⑤变现 → 绕回获客</strong>。</p>
+</blockquote>
+<h3>功能 ① 个人色彩季型卡（获客主钩子）</h3>
+<ul>
+<li><strong>是什么</strong>：4–6 道选择题（肤色/发色/瞳色/血管色）± 可选自拍 → 出"冷冬型/暖秋型"身份大标签 + 专属色卡（适合的口红/粉底/穿搭色），渲染成一张可保存可晒的卡片。</li>
+<li><strong>谁验证过</strong>：<code>#coloranalysis</code> 7.5 亿播放；Dressika 650 万下载、月流水约 13 万美元；Zamface 350 万用户；线下个人色彩 19.9 元~数千元、SHISPACE 半年卖 1000+ 套≈138 万元。<strong>且中国微信小程序无独立爆款 = 空位。</strong></li>
+<li><strong>为什么吸引人</strong>："我是冷冬型" = 美妆界 MBTI，强身份标签，极想晒、想拉姐妹来测；是<strong>事实性自我认知</strong>（比巴纳姆"被看穿"更硬、更经得起复测）。</li>
+<li><strong>吃库</strong>：❌（色卡是"色号原型"，非真实 SKU）。</li>
+<li><strong>角色 / 验证成本</strong>：拉新主钩子 / 纯答题，L0 手工出卡即可测，零开发起步。</li>
+</ul>
+<h3>功能 ② "只有 X%" 稀缺感 + 一键晒卡海报（分享放大器）</h3>
+<ul>
+<li><strong>是什么</strong>：卡片标注"全网只有 8% 的人是冷冬型"（后台按历史命中分布实时算）；一键生成竖版海报（卡片 + 小程序码 + 引导文案），存图发朋友圈/小红书。</li>
+<li><strong>谁验证过</strong>：妙鸭/Lensa 靠"出卡即晒"裂变（妙鸭单日 55 万收入）；新氧颜值卡 2.5 亿次；朋友圈无法直发小程序 → 存图是主路径（妆签 MVP 已认知）。</li>
+<li><strong>为什么吸引人</strong>：稀缺 = 炫耀 + FOMO（"全网都在玩"）；产出天然适配信息流，别人看了也想测 = 裂变闭环。</li>
+<li><strong>吃库</strong>：❌。</li>
+<li><strong>角色 / 验证成本</strong>：拉新裂变 / L1 可手工配海报。</li>
+</ul>
+<h3>功能 ③ 换季复测 /「另一面的你」（留存核心）</h3>
+<ul>
+<li><strong>是什么</strong>：给已测用户"换季了，你的色卡该更新了"提醒 + 解锁"另一组风格/隐藏型"复测；「我的色卡」常驻入口随时翻。</li>
+<li><strong>谁验证过</strong>：你今天真好看靠肤质趋势曲线做留存；个人色彩行业通用"季节 lookbook + 可重测"；Zamface 把诊断接成日常美妆起点。<strong>反证：妙鸭无复测 → 月活月抛。</strong></li>
+<li><strong>为什么吸引人</strong>：回来能解锁新身份 + 看自己变化；把"一次性测试"变成"定期回来的动作"。</li>
+<li><strong>吃库</strong>：❌。</li>
+<li><strong>角色</strong>：留存（直接给"为什么回来"的答案）。</li>
+</ul>
+<h3>功能 ④ 每周话题挑战 + 晒卡打卡（留存 + 裂变双引擎）</h3>
+<ul>
+<li><strong>是什么</strong>：运营每周推"本周话题卡"（如 #氛围感妆 / #新年红），用户出卡参与 + 打卡，连续天数/进度可视化。</li>
+<li><strong>谁验证过</strong>：Sephora Beauty Insider 挑战让参与度 +47%；Ulta 积分进度条占营收 95%；FaceApp 变老挑战 / Remini 婴儿照 → 统一玩法让 UGC 在小红书自堆量。</li>
+<li><strong>为什么吸引人</strong>：统一话题降低创作门槛 + 蹭节点热度；进度条/连续打卡的完成欲；比投放便宜得多的自然裂变。</li>
+<li><strong>吃库</strong>：❌。</li>
+<li><strong>角色</strong>：留存 + 拉新。</li>
+</ul>
+<h3>功能 ⑤ 色号 → 精选选品清单 + 导购（轻变现桥）</h3>
+<ul>
+<li><strong>是什么</strong>：每个推荐色号下挂 3–5 支精选代表产品（手工种子清单，先平替款后升级款）+ 导购链接；"你的冷冬型适合这几支正红"。</li>
+<li><strong>谁验证过</strong>：NielsenIQ×美图——测肤用户产品留存 2 倍、转化 3–5 倍；Zamface/小红书"诊断 → 导购"成熟；个人色彩天然落位美妆导购。</li>
+<li><strong>为什么吸引人</strong>："知道自己适合买什么、不踩雷"的事实性价值；从身份认知顺滑到购物决策。</li>
+<li><strong>吃库</strong>：🟡 轻 —— 只需手工精选种子清单（每色号 3–5 支），<strong>不是全量 SKU 库</strong>，正好用"种子库 + 电商联盟库"平替。</li>
+<li><strong>角色</strong>：变现（等有日活后再接）。</li>
+</ul>
+<hr />
+<h2>五、对 MMU 的结论</h2>
+<ul>
+<li>拉新和留存的所有高价值功能（评分卡/季型卡/趋势/挑战）<strong>全都不吃 SKU 库</strong> —— 库是后期变现护城河，不是冷启动门票。</li>
+<li>核心产出就是"一张卡"，<strong>能纯手工（人 + LLM）造出来先测</strong> —— 第一炮零库、零引擎、几乎零开发。</li>
+<li>用"换季复测 + 周更挑战 + 诊断接后端"接住留存，避开妙鸭"月活月抛"。</li>
+<li><strong>第一炮最优解：个人色彩/季型卡</strong>（功能 ①），其余 4 个功能围绕它形成闭环；先 L0/L1 手工验证"卡招不招人"，跑通再做真小程序谈留存。</li>
+</ul>
+<hr />
+<h2>附：数据说明</h2>
+<p>速度优先，单点数字（尤其 MAU/下载量/月流水）多为媒体披露或第三方（Sensor Tower / Similarweb）估算，作量级参考；正式立项前对关键数字再核一遍。各条均附出处于子调研报告中。</p>
+  </div>
+  <footer class="foot">
+    <p>这是我在做产品时沉淀的方法论文档之一。</p>
+    <a href="../">作品集首页</a><a href="../#skills">更多基本功文档</a>
+  </footer>
+</div>
+
+</body>
+</html>

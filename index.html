@@ -168,6 +168,20 @@
     section{padding:32px 0;}
     .footer{padding:30px 20px;}
   }
+  /* ===== PM Skills ===== */
+  .skills{background:var(--navy-tint);}
+  .skill-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:16px;margin-top:22px;}
+  .skill-card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 20px 16px;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease;}
+  .skill-card:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(31,39,51,.12);border-color:var(--navy);text-decoration:none;}
+  .sk-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+  .sk-n{font-size:13px;font-weight:800;color:var(--navy);letter-spacing:.1em;}
+  .sk-tag{font-size:11px;font-weight:600;color:var(--navy-deep);background:var(--navy-soft);border-radius:20px;padding:3px 10px;}
+  .skill-card h3{font-size:17px;font-weight:800;color:var(--ink);margin:0 0 7px;line-height:1.35;}
+  .skill-card p{font-size:13px;color:var(--ink-soft);line-height:1.7;margin:0 0 14px;flex:1;}
+  .sk-doc{font-size:12.5px;font-weight:700;color:var(--navy);border-top:1px solid var(--line);padding-top:12px;margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:8px;}
+  .sk-doc span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;}
+  .sk-doc .go{color:var(--navy-deep);white-space:nowrap;}
+  @media (max-width:720px){.skill-grid{grid-template-columns:1fr;}}
 </style>
 
 <div class="sheet">
@@ -197,32 +211,6 @@
     </div>
   </header>
 
-  <!-- ==================== ABOUT ==================== -->
-  <section class="about">
-    <div class="wrap">
-      <div class="sec-num"><span class="n">关于我</span><span class="cat">How I think about products</span><span class="bar"></span></div>
-      <p class="lead2">
-        我怎么做产品，可以从三件我<b>真正做过</b>的事里看出来——不是方法论口号，是落到项目里的选择。
-      </p>
-      <div class="principles">
-        <div class="principle">
-          <div class="pn">01</div>
-          <h3>先验证假设，再谈规模</h3>
-          <p>做 MMU 时我没急着堆功能，而是先用 150 人内测把「结构化教学交付」这个定位假设跑通，拿到数据再决定要不要放大。</p>
-        </div>
-        <div class="principle">
-          <div class="pn">02</div>
-          <h3>认真对待 AI 的边界</h3>
-          <p>大模型会幻觉，所以在 GopherPaper 里我把「每条回答附页码出处、可点击溯源」做成第一原则。AI 产品的信任是设计出来的，不是承诺出来的。</p>
-        </div>
-        <div class="principle">
-          <div class="pn">03</div>
-          <h3>能自己把想法跑起来</h3>
-          <p>我能写 PRD，也能用 Go / Next.js / RAG 把原型真正做出来。这让我在判断技术可行性、和工程师协作时不说外行话。</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ==================== CASE 01 · MMU ==================== -->
   <section class="case">
@@ -396,6 +384,73 @@
       <div class="callout">
         <span class="lbl">复盘</span>
         <p>这是我第一次带团队把一个 AI 产品从 0 做到真实规模化部署，让我学会在<b>「技术理想」和「教学场景的真实约束」之间做平衡</b>。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PM SKILLS ==================== -->
+  <section class="skills" id="skills">
+    <div class="wrap">
+      <div class="sec-num"><span class="n">产品经理基本功</span><span class="cat">PM Fundamentals · Real Deliverables</span><span class="bar"></span></div>
+      <p class="lead2">除了从 0 到 1 把产品做出来，产品经理的日常是一份份具体的交付物。下面每一项都配一份我<b>真实写过</b>的文档，点开即可读全文——不是模板，是项目里真正用过的产出。</p>
+      <div class="skill-grid">
+        <a class="skill-card" href="docs/market-research.html">
+          <div class="sk-top"><span class="sk-n">01</span><span class="sk-tag">K12 教育</span></div>
+          <h3>市场机会分析</h3>
+          <p>从一个方法论假设出发，用四条硬标准筛细分蓝海，落到风险从低到高的方向推荐。</p>
+          <div class="sk-doc"><span>《K12 · 决策前置化市场调研》</span><span class="go">查看 →</span></div>
+        </a>
+        <a class="skill-card" href="docs/competitive.html">
+          <div class="sk-top"><span class="sk-n">02</span><span class="sk-tag">MMU</span></div>
+          <h3>竞品分析</h3>
+          <p>跨赛道调研 27 款竞品，拆成功证据 / 留存机制 / 变现方式，提炼三条冷启动铁律，反推自己该做什么。</p>
+          <div class="sk-doc"><span>《MMU · 跨赛道 27 竞品调研》</span><span class="go">查看 →</span></div>
+        </a>
+        <a class="skill-card" href="docs/prd.html">
+          <div class="sk-top"><span class="sk-n">03</span><span class="sk-tag">MMU</span></div>
+          <h3>产品需求文档 PRD</h3>
+          <p>直接对接开发的 PRD：整体闭环流程图、功能优先级与依赖、输出数据结构、埋点事件表。</p>
+          <div class="sk-doc"><span>《MMU · 首炮功能设计 PRD》</span><span class="go">查看 →</span></div>
+        </a>
+        <a class="skill-card" href="docs/mvp-validation.html">
+          <div class="sk-top"><span class="sk-n">04</span><span class="sk-tag">MMU</span></div>
+          <h3>MVP 与增长验证</h3>
+          <p>不实现完整产品，用最轻的钩子快速上线，定义可证伪的假设与埋点体系，明确 YAGNI 不做什么。</p>
+          <div class="sk-doc"><span>《妆签 · 传播验证 MVP 设计》</span><span class="go">查看 →</span></div>
+        </a>
+        <a class="skill-card" href="docs/beta-report.html">
+          <div class="sk-top"><span class="sk-n">05</span><span class="sk-tag">MMU</span></div>
+          <h3>数据验证与复盘</h3>
+          <p>用行为埋点 + 问卷把定位假设量化验证：PMF 信号、核心转化漏斗、功能好评、定价与商业模式测试。</p>
+          <div class="sk-doc"><span>《MMU · 150 人内测报告》</span><span class="go">查看 →</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ABOUT ==================== -->
+  <section class="about">
+    <div class="wrap">
+      <div class="sec-num"><span class="n">关于我</span><span class="cat">How I think about products</span><span class="bar"></span></div>
+      <p class="lead2">
+        看完项目和文档，也许你已经能猜到我怎么做产品。我的方法可以从三件<b>真正做过</b>的事里看出来——不是方法论口号，是落到项目里的选择。
+      </p>
+      <div class="principles">
+        <div class="principle">
+          <div class="pn">01</div>
+          <h3>先验证假设，再谈规模</h3>
+          <p>做 MMU 时我没急着堆功能，而是先用 150 人内测把「结构化教学交付」这个定位假设跑通，拿到数据再决定要不要放大。</p>
+        </div>
+        <div class="principle">
+          <div class="pn">02</div>
+          <h3>认真对待 AI 的边界</h3>
+          <p>大模型会幻觉，所以在 GopherPaper 里我把「每条回答附页码出处、可点击溯源」做成第一原则。AI 产品的信任是设计出来的，不是承诺出来的。</p>
+        </div>
+        <div class="principle">
+          <div class="pn">03</div>
+          <h3>能自己把想法跑起来</h3>
+          <p>我能写 PRD，也能用 Go / Next.js / RAG 把原型真正做出来。这让我在判断技术可行性、和工程师协作时不说外行话。</p>
+        </div>
       </div>
     </div>
   </section>
