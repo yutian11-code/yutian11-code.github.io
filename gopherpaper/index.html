@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GopherPaper Demo · 马天宇</title>
+<meta name="description" content="GopherPaper 多智能体科研文献解析平台 · 60 秒真实录屏 Demo、界面截图、自建评测结果与产品决策复盘">
+<style>
+  :root{
+    --navy:#244884;--navy-deep:#1C3A6E;--navy-soft:#E7ECF5;--navy-tint:#F3F6FB;
+    --ink:#1F2733;--ink-soft:#3C4757;--ink-faint:#7C8797;--paper:#fff;--bg:#EBEEF3;--line:#DEE4EC;
+    --ok:#1F7A5C;--warn:#B4541A;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:"PingFang SC","Noto Sans SC","Noto Sans CJK SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;line-height:1.75}
+  a{color:var(--navy);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .sheet{max-width:960px;margin:0 auto;background:var(--paper);box-shadow:0 6px 40px rgba(31,39,51,.12)}
+  .wrap{padding:0 56px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 56px;border-bottom:1px solid var(--line);font-size:13px}
+  .topbar .crumb{color:var(--ink-faint)}
+  .topbar .crumb b{color:var(--ink);font-weight:700}
+  .topbar .back{font-weight:600}
+  .hero{background:var(--navy);color:#fff;padding:44px 56px 36px}
+  .hero .eyebrow{font-size:12px;letter-spacing:.3em;color:#AEC2E4;font-weight:600;text-transform:uppercase;margin:0 0 14px}
+  .hero h1{font-size:40px;font-weight:800;letter-spacing:.02em;margin:0 0 6px;line-height:1.15}
+  .hero .sub{font-size:17px;font-weight:600;color:#CBD9EF;margin:0 0 18px}
+  .hero .lead{font-size:15px;line-height:1.85;color:#E4ECF8;margin:0;max-width:720px}
+  .hero .lead b{color:#fff}
+  .meta{display:flex;flex-wrap:wrap;gap:10px 12px;margin-top:22px}
+  .meta span{font-size:12.5px;color:#DCE6F6;border:1px solid rgba(255,255,255,.28);border-radius:20px;padding:4px 14px}
+  .meta span b{color:#fff;font-weight:700}
+  section{padding:38px 0}
+  section+section{border-top:1px solid var(--line)}
+  .sec{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .sec .n{font-size:13px;font-weight:800;color:var(--navy);letter-spacing:.1em;white-space:nowrap}
+  .sec .cat{font-size:12px;color:var(--ink-faint);letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+  .sec .bar{flex:1;height:1px;background:var(--line)}
+  h2{font-size:24px;font-weight:800;margin:0 0 10px;line-height:1.3}
+  p{font-size:14.5px;color:var(--ink-soft);line-height:1.85;margin:0 0 10px;text-wrap:pretty}
+  p b{color:var(--ink)}
+  .video-box{background:var(--navy-deep);border-radius:10px;overflow:hidden;box-shadow:0 10px 30px rgba(28,58,110,.25)}
+  .video-box video{display:block;width:100%;height:auto;background:#000}
+  .caption{font-size:12.5px;color:var(--ink-faint);margin-top:10px;line-height:1.6}
+  .chapters{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px}
+  .chapters .ch{background:var(--navy-tint);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:12.5px;color:var(--ink-soft);cursor:pointer}
+  .chapters .ch b{display:block;color:var(--navy);font-size:12px;letter-spacing:.06em;margin-bottom:2px}
+  .chapters .ch:hover{border-color:var(--navy)}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:18px 18px}
+  .card .k{font-size:11.5px;font-weight:800;color:var(--navy);letter-spacing:.1em;margin-bottom:6px}
+  .card h3{font-size:15.5px;font-weight:700;margin:0 0 6px;line-height:1.4}
+  .card p{font-size:13.5px;margin:0}
+  .callout{background:var(--navy-soft);border-left:3px solid var(--navy);border-radius:0 8px 8px 0;padding:16px 20px;margin:16px 0}
+  .callout .lbl{font-size:11px;font-weight:800;color:var(--navy);letter-spacing:.1em;display:block;margin-bottom:6px}
+  .callout p{margin:0;color:var(--ink)}
+  .shots{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  figure{margin:0}
+  figure img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:8px;background:var(--navy-tint)}
+  figure figcaption{font-size:13px;color:var(--ink-soft);margin-top:8px;line-height:1.6}
+  figure figcaption b{color:var(--ink)}
+  figure.wide{grid-column:1 / -1}
+  .flow{display:flex;align-items:stretch;flex-wrap:wrap;gap:6px 0;margin:10px 0}
+  .flow .step{flex:1;min-width:96px;background:#fff;border:1px solid var(--line);border-radius:7px;padding:10px 8px;text-align:center;font-size:12.5px;font-weight:600;color:var(--ink);display:flex;align-items:center;justify-content:center;line-height:1.4}
+  .flow .step.key{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .flow .arr{display:flex;align-items:center;color:var(--navy);font-size:15px;padding:0 6px;font-weight:700}
+  .flow .step small{display:block;font-weight:500;font-size:11px;opacity:.8;margin-top:2px}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0 4px}
+  th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{font-size:12px;color:var(--ink-faint);letter-spacing:.06em;font-weight:700}
+  td.num{font-size:20px;font-weight:800;color:var(--navy);white-space:nowrap}
+  td.num.warn{color:var(--warn)}
+  td small{display:block;font-size:12px;color:var(--ink-faint);font-weight:500}
+  .tbl-wrap{overflow-x:auto}
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+  .tags .t{font-size:11.5px;font-weight:600;color:var(--navy-deep);background:var(--navy-soft);border-radius:20px;padding:4px 12px}
+  ul.plain{margin:0;padding-left:20px;font-size:14.5px;color:var(--ink-soft);line-height:1.85}
+  ul.plain li{margin-bottom:6px}
+  ul.plain b{color:var(--ink)}
+  .honest{background:var(--navy-tint);border:1px dashed #B9C6DC;border-radius:8px;padding:16px 20px;font-size:13px;color:var(--ink-soft);line-height:1.8}
+  .honest b{color:var(--navy-deep)}
+  .footer{background:var(--navy);color:#fff;padding:34px 56px;text-align:center}
+  .footer h3{font-size:20px;font-weight:800;margin:0 0 8px}
+  .footer p{font-size:13.5px;color:#CBD9EF;margin:0 0 16px}
+  .footer .contact{display:flex;justify-content:center;flex-wrap:wrap;gap:10px 12px}
+  .footer .contact span,.footer .contact a{font-size:13px;color:#E4ECF8;border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:5px 16px}
+  .footer .note{font-size:11px;color:#8FA6CC;margin-top:20px}
+  @media (max-width:720px){
+    .wrap,.topbar,.hero,.footer{padding-left:20px;padding-right:20px}
+    .hero{padding-top:32px;padding-bottom:28px}
+    .hero h1{font-size:30px}
+    .hero .sub{font-size:15px}
+    .chapters{grid-template-columns:1fr 1fr}
+    .grid3{grid-template-columns:1fr}
+    .shots{grid-template-columns:1fr}
+    .flow .arr{display:none}
+    .flow .step{min-width:46%;margin:3px}
+    h2{font-size:21px}
+    section{padding:28px 0}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="topbar">
+    <span class="crumb"><b>马天宇</b> · AI 产品经理作品集 / 案例 02</span>
+    <a class="back" href="../">← 返回作品集</a>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow">Case 02 · Live Demo</p>
+    <h1>GopherPaper</h1>
+    <p class="sub">多智能体科研文献解析平台 —— 让文献从「读一篇」变成「管理一个知识体系」</p>
+    <p class="lead">针对科研读文献<b>读得慢、问不深、记不住</b>，以及现有 AI 工具<b>回答会编造出处</b>的信任问题。产品把「每条回答附页码出处、可点击溯源」定为第一原则，并用自建评测集验证这条原则真的成立。</p>
+    <div class="meta">
+      <span>角色 <b>产品负责人</b>（团队项目）</span>
+      <span>时间 <b>2026.06 – 2026.08</b></span>
+      <span>状态 <b>本地部署可运行 · 自建评测已验证</b></span>
+      <span>技术 <b>Go · Next.js · Milvus · Multi-Agent</b></span>
+    </div>
+  </header>
+
+  <!-- ===== 视频 ===== -->
+  <section id="video">
+    <div class="wrap">
+      <div class="sec"><span class="n">01 · 真实录屏</span><span class="cat">60 seconds walkthrough</span><span class="bar"></span></div>
+      <div class="video-box">
+        <video id="demo" controls playsinline preload="metadata" poster="poster.jpg">
+          <source src="demo.mp4" type="video/mp4">
+          你的浏览器不支持内嵌视频，<a href="demo.mp4">点此下载观看</a>。
+        </video>
+      </div>
+      <p class="caption">本地部署环境真实录屏（2026-09），未做合成。论文为公开论文《Attention Is All You Need》。中间等待大模型生成的约 70 秒已加速。</p>
+      <div class="chapters">
+        <div class="ch" data-t="0"><b>00 · 论文库</b>已解析入库的 20+ 篇论文</div>
+        <div class="ch" data-t="chat"><b>01 · 提问</b>选中论文，问一个要页码的问题</div>
+        <div class="ch" data-t="answer"><b>02 · 带出处的回答</b>答案自带「原文 · 第 5 页」</div>
+        <div class="ch" data-t="reader"><b>03 · 一键核验</b>点击出处直接跳到原文第 5 页</div>
+        <div class="ch" data-t="graph"><b>04 · 知识图谱</b>论文 / 作者 / 关键词的关系网</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 产品决策 ===== -->
+  <section id="story">
+    <div class="wrap">
+      <div class="sec"><span class="n">02 · 三个产品决策</span><span class="cat">Why it looks like this</span><span class="bar"></span></div>
+      <div class="grid3">
+        <div class="card">
+          <div class="k">范围</div>
+          <h3>MVP 只做两件事</h3>
+          <p>面对「解析 / 问答 / 知识库 / 研报 / 多模态检索」的庞大需求，MVP 阶段只保留<b>论文解析 + 证据问答</b>，用「论文精读 / 学术检索 / 知识管理」三个角色化智能体分工承接，其余功能后置。</p>
+        </div>
+        <div class="card">
+          <div class="k">信任</div>
+          <h3>出处是第一原则</h3>
+          <p>AI 阅读工具最大的信任问题是编造出处。于是每条回答必须<b>附页码、可点击跳回原文</b>，用户不用盲信，而是能一键核验。这条原则决定了分块方式、检索方式和界面。</p>
+        </div>
+        <div class="card">
+          <div class="k">成本</div>
+          <h3>质量和 token 一起管</h3>
+          <p>用<b>意图小模型</b>给高频轻问题分流，用<b>会话摘要</b>治理多轮上下文，多模态检索配<b>两阶段 rerank</b> 精排。回答质量和成本不是二选一，是一起设计。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 截图 ===== -->
+  <section id="shots">
+    <div class="wrap">
+      <div class="sec"><span class="n">03 · 界面</span><span class="cat">Screens</span><span class="bar"></span></div>
+      <div class="shots">
+        <figure class="wide">
+          <img src="s2-answer.jpg" alt="带页码出处的回答" loading="lazy">
+          <figcaption><b>证据问答。</b>回答下方展示执行过程（思考 3 步）与工具轨迹（论文检索 1 次），答案末尾是可点击的「原文 · 第 5 页」出处，引用来源可展开查看。</figcaption>
+        </figure>
+        <figure>
+          <img src="s3-reader.jpg" alt="阅读器定位到第 5 页" loading="lazy">
+          <figcaption><b>一键核验。</b>点击出处，阅读器直接打开原文第 5 页，右侧研读面板支持选段翻译、高亮与批注。</figcaption>
+        </figure>
+        <figure>
+          <img src="s1-library.jpg" alt="论文库" loading="lazy">
+          <figcaption><b>论文库。</b>上传 PDF 后异步解析，按状态与关键词筛选；卡片进入精读、对话、报告。</figcaption>
+        </figure>
+        <figure>
+          <img src="s4-graph.jpg" alt="论文关系图谱" loading="lazy">
+          <figcaption><b>知识图谱。</b>论文、作者、关键词、方法、结论等 1800+ 节点的关系图，是「记不住」这个痛点的答案。</figcaption>
+        </figure>
+        <figure>
+          <img src="s5-admin.jpg" alt="后台分析概览" loading="lazy">
+          <figcaption><b>后台管理台 · 数据看板。</b>我动手开发的模块：论文状态分布、解析流水线漏斗、服务调用趋势与 Top 用户，把运维视角的后台改成产品视角的看板。</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 架构 ===== -->
+  <section id="arch">
+    <div class="wrap">
+      <div class="sec"><span class="n">04 · 它是怎么做到「答案带页码」的</span><span class="cat">Architecture</span><span class="bar"></span></div>
+      <div class="flow">
+        <div class="step">上传 PDF</div><div class="arr">→</div>
+        <div class="step">版面解析<small>MinerU · 文本/表格/图片</small></div><div class="arr">→</div>
+        <div class="step key">四类分块 · 带页码<small>text / table / image / title</small></div><div class="arr">→</div>
+        <div class="step">向量库<small>Milvus · embedding</small></div><div class="arr">→</div>
+        <div class="step">意图分流<small>小模型 · 轻问题直答</small></div><div class="arr">→</div>
+        <div class="step key">检索 + 两阶段 rerank</div><div class="arr">→</div>
+        <div class="step">精读 Agent 生成<small>答案 + sources[].page_no</small></div><div class="arr">→</div>
+        <div class="step key">阅读器定位原文页</div>
+      </div>
+      <p>关键在中间那一步：<b>分块时就把页码作为元数据带上</b>，检索命中的每个片段天然携带页码，答案里的出处不是模型「回忆」出来的，而是从命中片段直接取的。这就是为什么溯源召回可以做到 95% 以上。</p>
+      <div class="tags">
+        <span class="t">Go</span><span class="t">tRPC-Agent-Go 多智能体编排</span><span class="t">Next.js</span><span class="t">Milvus</span><span class="t">MySQL · Neo4j · RabbitMQ</span><span class="t">MinerU 解析</span><span class="t">SSE 流式</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 评测 ===== -->
+  <section id="eval">
+    <div class="wrap">
+      <div class="sec"><span class="n">05 · 自建评测：原则有没有兑现</span><span class="cat">Evaluation</span><span class="bar"></span></div>
+      <p>「回答可信」不能靠感觉。我用 <b>18 篇公开论文</b>构造了 <b>50 题评测集</b>（事实 26 / 推理 12 / 表格 7 / 不可答 5），每题标注金标准答案与页码，脚本自动跑问答、LLM 评分并人工复核。</p>
+      <div class="tbl-wrap">
+      <table>
+        <tr><th>指标</th><th>结果</th><th>怎么算的</th></tr>
+        <tr><td>答案正确率</td><td class="num">87.0%<small>50 题</small></td><td>事实 92.3% · 推理 83.3% · 表格 78.6% · 不可答 80%</td></tr>
+        <tr><td>溯源召回率</td><td class="num">95.6%<small>43 / 45</small></td><td>可答题中，引用页里命中任一正确页码的比例</td></tr>
+        <tr><td>溯源精度</td><td class="num warn">31.3%<small>61 / 195</small></td><td>引用页里真正正确的比例 —— 明显偏低，是当前主要弱点</td></tr>
+        <tr><td>拒答正确率</td><td class="num">80%<small>4 / 5</small></td><td>论文里没有的信息，是否诚实说「没有」而不是编</td></tr>
+      </table>
+      </div>
+      <div class="callout">
+        <span class="lbl">我怎么看这组数字</span>
+        <p>召回高、精度低，说明系统「宁多勿漏」：答案基本能找对页，但一次给出的引用页太多，用户核验成本高。这是我下一轮要改的点：<b>按相关度截断引用、只保留支撑最终答案的片段</b>。评测集本身的弱点我也认：单人标注、LLM 评分未全量人工复核、论文领域集中在深度学习经典论文。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 我做了什么 ===== -->
+  <section id="role">
+    <div class="wrap">
+      <div class="sec"><span class="n">06 · 团队与我的部分</span><span class="cat">My part</span><span class="bar"></span></div>
+      <p>GopherPaper 是<b>团队项目</b>，后端主体由团队同学完成。我作为产品负责人，具体做了这些：</p>
+      <ul class="plain">
+        <li><b>需求范围与 MVP 界定</b>：把庞大需求收敛为「解析 + 证据问答」两件事，定义三个智能体的分工边界。</li>
+        <li><b>反幻觉第一原则</b>：把「页码出处 + 可点击溯源」写进产品原则，并推动分块、检索、界面按这条原则设计。</li>
+        <li><b>评测体系</b>：自建 50 题评测集、评分脚本与报告，让「可信」变成能量化、能迭代的指标。</li>
+        <li><b>后台管理台与数据看板</b>：动手开发。把后台重构为分页模块，删掉运维式看板，改成产品视角的「分析概览」。</li>
+        <li><b>入库排障</b>：批量上传触发限流，出现「状态 ready 但零分块」的假就绪，我从 Milvus 侧定位并修复，这也是为什么评测最终只用了 18 篇。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="honest">
+    <div class="wrap">
+      <div class="honest">
+        <b>口径说明：</b>系统在本地环境部署运行，<b>未公网上线</b>，所以这里放的是录屏与截图而不是在线体验入口。视频为真实操作录屏，评测数据来自自建评测集而非线上用户数据，所有数字可在面试时展示脚本与原始记录复现。
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <h3>想聊聊这个项目？</h3>
+    <p>面试时我可以现场跑这套系统，任选一篇论文提问。</p>
+    <div class="contact">
+      <span>19855789913</span>
+      <span>1337316949@qq.com</span>
+      <a href="../">作品集首页</a>
+      <a href="../mmu/">案例 01 · MMU</a>
+    </div>
+    <p class="note">马天宇 · 重庆大学软件工程 · AI 产品经理 · 2027 届</p>
+  </footer>
+</div>
+<script>
+  // 章节跳转：时间点在视频剪辑完成后由 data-t 换成秒数
+  const T = {"0":0,"chat":7.6,"answer":22.3,"reader":28.3,"graph":34.8};
+  document.querySelectorAll('.ch').forEach(el=>el.addEventListener('click',()=>{
+    const v=document.getElementById('demo'); const k=el.dataset.t; const t=(k in T)?T[k]:Number(k)||0;
+    v.currentTime=t; v.play();
+  }));
+</script>
+</body>
+</html>

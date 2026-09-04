@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MMU Demo · 马天宇</title>
+<meta name="description" content="MMU · AI 美妆 App 从 0 到 1：真机录屏、界面截图、150 人内测数据与 PMF 复盘">
+<style>
+  :root{
+    --navy:#244884;--navy-deep:#1C3A6E;--navy-soft:#E7ECF5;--navy-tint:#F3F6FB;
+    --ink:#1F2733;--ink-soft:#3C4757;--ink-faint:#7C8797;--paper:#fff;--bg:#EBEEF3;--line:#DEE4EC;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:"PingFang SC","Noto Sans SC","Noto Sans CJK SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;line-height:1.75}
+  a{color:var(--navy);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .sheet{max-width:960px;margin:0 auto;background:var(--paper);box-shadow:0 6px 40px rgba(31,39,51,.12)}
+  .wrap{padding:0 56px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 56px;border-bottom:1px solid var(--line);font-size:13px}
+  .topbar .crumb{color:var(--ink-faint)}
+  .topbar .crumb b{color:var(--ink);font-weight:700}
+  .topbar .back{font-weight:600}
+  .hero{background:var(--navy);color:#fff;padding:44px 56px 36px}
+  .hero .eyebrow{font-size:12px;letter-spacing:.3em;color:#AEC2E4;font-weight:600;text-transform:uppercase;margin:0 0 14px}
+  .hero h1{font-size:40px;font-weight:800;letter-spacing:.02em;margin:0 0 6px;line-height:1.15}
+  .hero .sub{font-size:17px;font-weight:600;color:#CBD9EF;margin:0 0 18px}
+  .hero .lead{font-size:15px;line-height:1.85;color:#E4ECF8;margin:0;max-width:720px}
+  .hero .lead b{color:#fff}
+  .meta{display:flex;flex-wrap:wrap;gap:10px 12px;margin-top:22px}
+  .meta span{font-size:12.5px;color:#DCE6F6;border:1px solid rgba(255,255,255,.28);border-radius:20px;padding:4px 14px}
+  .meta span b{color:#fff;font-weight:700}
+  section{padding:38px 0}
+  section+section{border-top:1px solid var(--line)}
+  .sec{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .sec .n{font-size:13px;font-weight:800;color:var(--navy);letter-spacing:.1em;white-space:nowrap}
+  .sec .cat{font-size:12px;color:var(--ink-faint);letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+  .sec .bar{flex:1;height:1px;background:var(--line)}
+  p{font-size:14.5px;color:var(--ink-soft);line-height:1.85;margin:0 0 10px;text-wrap:pretty}
+  p b{color:var(--ink)}
+  /* 竖屏视频 + 旁白并排 */
+  .phone-row{display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:start}
+  .phone{background:var(--navy-deep);border-radius:26px;padding:10px;box-shadow:0 14px 34px rgba(28,58,110,.28)}
+  .phone video{display:block;width:100%;height:auto;border-radius:18px;background:#000;aspect-ratio:9/19.5}
+  .phone .pending{aspect-ratio:9/19.5;border-radius:18px;background:linear-gradient(160deg,#2D5399,#1C3A6E);color:#DCE6F6;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font-size:13px;line-height:1.7}
+  .phone .pending b{display:block;color:#fff;font-size:15px;margin-bottom:6px}
+  .caption{font-size:12.5px;color:var(--ink-faint);margin-top:10px;line-height:1.6}
+  .steps{counter-reset:s}
+  .steps .s{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .steps .s:last-child{border-bottom:0}
+  .steps .s::before{counter-increment:s;content:counter(s,decimal-leading-zero);font-size:12px;font-weight:800;color:var(--navy);letter-spacing:.08em;padding-top:4px;flex:none}
+  .steps .s h4{font-size:15px;font-weight:700;margin:0 0 3px}
+  .steps .s p{font-size:13.5px;margin:0}
+  .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  figure{margin:0}
+  figure img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:14px;background:var(--navy-tint)}
+  figure .ph{aspect-ratio:9/19.5;border:1.5px dashed #B9C6DC;border-radius:14px;background:var(--navy-tint);display:flex;align-items:center;justify-content:center;color:var(--navy-deep);font-size:13px;font-weight:700;text-align:center;padding:16px}
+  figure figcaption{font-size:13px;color:var(--ink-soft);margin-top:8px;line-height:1.6}
+  figure figcaption b{color:var(--ink)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:18px}
+  .card .k{font-size:11.5px;font-weight:800;color:var(--navy);letter-spacing:.1em;margin-bottom:6px}
+  .card h3{font-size:15.5px;font-weight:700;margin:0 0 6px;line-height:1.4}
+  .card p{font-size:13.5px;margin:0}
+  .flow{display:flex;align-items:stretch;flex-wrap:wrap;gap:6px 0;margin:10px 0}
+  .flow .step{flex:1;min-width:96px;background:#fff;border:1px solid var(--line);border-radius:7px;padding:10px 8px;text-align:center;font-size:12.5px;font-weight:600;color:var(--ink);display:flex;align-items:center;justify-content:center;line-height:1.4}
+  .flow .step.key{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .flow .arr{display:flex;align-items:center;color:var(--navy);font-size:15px;padding:0 6px;font-weight:700}
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:8px 0 4px}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:8px;padding:18px 16px 16px}
+  .stat .num{font-size:32px;font-weight:800;color:var(--navy);line-height:1}
+  .stat .num small{font-size:17px;font-weight:700}
+  .stat .cap{font-size:12.5px;color:var(--ink-soft);margin-top:8px;font-weight:600}
+  .stat .bar{height:5px;background:var(--navy-soft);border-radius:3px;margin-top:12px;overflow:hidden}
+  .stat .bar i{display:block;height:100%;background:var(--navy);border-radius:3px}
+  .stat .q{font-size:11.5px;color:var(--ink-faint);margin-top:9px;line-height:1.5}
+  .callout{background:var(--navy-soft);border-left:3px solid var(--navy);border-radius:0 8px 8px 0;padding:16px 20px;margin:16px 0}
+  .callout .lbl{font-size:11px;font-weight:800;color:var(--navy);letter-spacing:.1em;display:block;margin-bottom:6px}
+  .callout p{margin:0;color:var(--ink)}
+  .honest{background:var(--navy-tint);border:1px dashed #B9C6DC;border-radius:8px;padding:16px 20px;font-size:13px;color:var(--ink-soft);line-height:1.8}
+  .honest b{color:var(--navy-deep)}
+  .footer{background:var(--navy);color:#fff;padding:34px 56px;text-align:center}
+  .footer h3{font-size:20px;font-weight:800;margin:0 0 8px}
+  .footer p{font-size:13.5px;color:#CBD9EF;margin:0 0 16px}
+  .footer .contact{display:flex;justify-content:center;flex-wrap:wrap;gap:10px 12px}
+  .footer .contact span,.footer .contact a{font-size:13px;color:#E4ECF8;border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:5px 16px}
+  .footer .note{font-size:11px;color:#8FA6CC;margin-top:20px}
+  @media (max-width:720px){
+    .wrap,.topbar,.hero,.footer{padding-left:20px;padding-right:20px}
+    .hero{padding-top:32px;padding-bottom:28px}
+    .hero h1{font-size:30px}
+    .hero .sub{font-size:15px}
+    .phone-row{grid-template-columns:1fr}
+    .phone{max-width:300px;margin:0 auto}
+    .shots{grid-template-columns:1fr 1fr}
+    .grid2,.stat-row{grid-template-columns:1fr}
+    .flow .arr{display:none}
+    .flow .step{min-width:46%;margin:3px}
+    section{padding:28px 0}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="topbar">
+    <span class="crumb"><b>马天宇</b> · AI 产品经理作品集 / 案例 01</span>
+    <a class="back" href="../">← 返回作品集</a>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow">Case 01 · Product Demo</p>
+    <h1>MMU · AI 美妆 App</h1>
+    <p class="sub">用自己已有的化妆品，跟 AI 一步步化出好妆容</p>
+    <p class="lead">美妆市场「重销售、轻教学」，新手真正的痛点是<b>买了不会用</b>。MMU 不做又一个商城，而是把产品定位为<b>结构化教学交付</b>：识别你手里的化妆品 → 生成适配妆容 → 分步指导 → 完成度反馈。独立完成从市场调研、产品定义到 <b>150 人内测验证</b>的 0→1，Android 内测版已打包。</p>
+    <div class="meta">
+      <span>角色 <b>产品负责人</b>（0→1）</span>
+      <span>时间 <b>2026.03 – 2026.06</b></span>
+      <span>状态 <b>内测验证完成 · 未上线</b></span>
+      <span>形态 <b>Android App（内测版 APK）</b></span>
+    </div>
+  </header>
+
+  <!-- ===== 录屏 ===== -->
+  <section id="video">
+    <div class="wrap">
+      <div class="sec"><span class="n">01 · 真机录屏</span><span class="cat">Walkthrough</span><span class="bar"></span></div>
+      <div class="phone-row">
+        <div class="phone">
+          <!-- VIDEO_SLOT_START -->
+          <div class="pending"><div><b>录屏整理中</b>内测版真机录屏即将上线</div></div>
+          <!-- VIDEO_SLOT_END -->
+        </div>
+        <div>
+          <div class="steps">
+            <div class="s"><div><h4>识别已有化妆品</h4><p>拍照或选择手里的产品，建立「我的化妆包」。推荐从这里出发，锚定用户已经拥有的东西，而不是先卖货。</p></div></div>
+            <div class="s"><div><h4>生成适配妆容</h4><p>按「用户画像 — 产品库 — 场景风格」三路召回与重排，给出能用现有产品完成的妆容方案。</p></div></div>
+            <div class="s"><div><h4>分步骤指导</h4><p>把一个妆拆成可跟做的步骤，每步只说这一步该用哪支、怎么涂。这是内测里好评最高的部分。</p></div></div>
+            <div class="s"><div><h4>完成度反馈</h4><p>做完后给出反馈与下一次的建议，形成「学 → 做 → 改」的闭环，而不是看完教程就结束。</p></div></div>
+          </div>
+          <p class="caption">内测期真机录屏。后端服务已随项目停止而下线，因此不提供 APK 下载，仅以录屏与截图呈现。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 截图 ===== -->
+  <section id="shots">
+    <div class="wrap">
+      <div class="sec"><span class="n">02 · 界面</span><span class="cat">Screens</span><span class="bar"></span></div>
+      <div class="shots">
+        <!-- SHOTS_SLOT_START -->
+        <figure><div class="ph">截图 1<br>识别化妆品</div><figcaption><b>识别已有化妆品。</b>建立个人化妆包。</figcaption></figure>
+        <figure><div class="ph">截图 2<br>妆容推荐</div><figcaption><b>妆容推荐。</b>只推荐手里产品能完成的方案。</figcaption></figure>
+        <figure><div class="ph">截图 3<br>分步教学</div><figcaption><b>分步教学。</b>一步一支产品、一个动作。</figcaption></figure>
+        <!-- SHOTS_SLOT_END -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 决策 ===== -->
+  <section id="story">
+    <div class="wrap">
+      <div class="sec"><span class="n">03 · 三个关键决策</span><span class="cat">Decisions</span><span class="bar"></span></div>
+      <div class="grid2">
+        <div class="card">
+          <div class="k">定位</div>
+          <h3>做「教学交付」，不做又一个商城</h3>
+          <p>调研 <b>4 大渠道 27 款竞品</b>，发现市场重销售、轻教学。据此把产品定位为结构化教学交付，MVP 只保留「识别 → 生成 → 指导 → 反馈」主链路，砍掉社区与商城。</p>
+        </div>
+        <div class="card">
+          <div class="k">推荐</div>
+          <h3>锚定用户手里已有的产品</h3>
+          <p>用户很难描述自己想要什么妆。设计「用户画像 — 产品库 — 场景风格」三路召回与重排，让推荐从已有产品出发。内测<b>推荐意愿 89%</b>。</p>
+        </div>
+        <div class="card">
+          <div class="k">收敛</div>
+          <h3>从「一键上妆」退到「轻推荐 + 分步教学」</h3>
+          <p>内测发现用户对 AI 全自动上妆信任不足。主动把方案收敛为「轻推荐 + 分步教学 + 可选 AI 辅助」，分步教学好评升至 <b>92%</b>。</p>
+        </div>
+        <div class="card">
+          <div class="k">变现</div>
+          <h3>低价订阅 + 电商 CPS</h3>
+          <p>用会员权益排序与月费定价测试确定主力价格带，规划「教学订阅做留存、电商分佣做变现」的双轮路径。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 数据 ===== -->
+  <section id="data">
+    <div class="wrap">
+      <div class="sec"><span class="n">04 · 内测数据</span><span class="cat">150 seed users · 128 surveys</span><span class="bar"></span></div>
+      <p>组织 <b>150 名种子用户</b>内测，全链路埋点加 <b>128 份问卷</b>。三个数字分别回答三个不同的问题：</p>
+      <div class="stat-row">
+        <div class="stat"><div class="num">72<small>%</small></div><div class="cap">核心场景启动率</div><div class="bar"><i style="width:72%"></i></div><div class="q">来了会不会用核心功能 → PMF 核心信号</div></div>
+        <div class="stat"><div class="num">89<small>%</small></div><div class="cap">推荐意愿</div><div class="bar"><i style="width:89%"></i></div><div class="q">愿不愿意推荐给别人 → 口碑</div></div>
+        <div class="stat"><div class="num">92<small>%</small></div><div class="cap">分步教学好评</div><div class="bar"><i style="width:92%"></i></div><div class="q">核心体验好不好 → 教学价值成立</div></div>
+      </div>
+      <div class="callout">
+        <span class="lbl">复盘 · 为什么停在内测</span>
+        <p>内测数据支持定位假设，团队计划融资放大，最终未获融资，项目停在内测之后。这段经历让我完整走通了「假设 → 验证 → 商业化设计」的闭环，也建立了自己判断「什么信号才算真正验证了 PMF」的标准：<b>不是下载量，而是核心场景的启动率与复用。</b></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="honest">
+    <div class="wrap">
+      <div class="honest">
+        <b>口径说明：</b>MMU 完成内测验证但<b>未公开上线</b>；Android 内测版 APK 已打包，但后端服务已下线，安装后无法使用，因此这里不提供下载。内测数据来自 150 名种子用户的埋点与问卷，面试时可展示原始问卷统计。
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <h3>想聊聊这个项目？</h3>
+    <p>从 27 款竞品分析到内测问卷原始数据，都可以在面试时展开。</p>
+    <div class="contact">
+      <span>19855789913</span>
+      <span>1337316949@qq.com</span>
+      <a href="../">作品集首页</a>
+      <a href="../gopherpaper/">案例 02 · GopherPaper</a>
+    </div>
+    <p class="note">马天宇 · 重庆大学软件工程 · AI 产品经理 · 2027 届</p>
+  </footer>
+</div>
+</body>
+</html>
