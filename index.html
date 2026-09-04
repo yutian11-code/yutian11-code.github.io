@@ -181,6 +181,11 @@
   .sk-doc{font-size:12.5px;font-weight:700;color:var(--navy);border-top:1px solid var(--line);padding-top:12px;margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:8px;}
   .sk-doc span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;}
   .sk-doc .go{color:var(--navy-deep);white-space:nowrap;}
+  .sk-docs{margin-top:auto;border-top:1px solid var(--line);padding-top:11px;display:flex;flex-direction:column;gap:9px;}
+  .sk-doc-row{font-size:12.5px;font-weight:700;color:var(--navy);display:flex;justify-content:space-between;align-items:center;gap:8px;text-decoration:none;}
+  .sk-doc-row:hover{color:var(--navy-deep);}
+  .sk-doc-row span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .sk-doc-row .go{color:var(--navy-deep);white-space:nowrap;}
   @media (max-width:720px){.skill-grid{grid-template-columns:1fr;}}
 </style>
 
@@ -400,26 +405,23 @@
           <p>从一个方法论假设出发，用四条硬标准筛细分蓝海，落到风险从低到高的方向推荐。</p>
           <div class="sk-doc"><span>《K12 · 决策前置化市场调研》</span><span class="go">查看 →</span></div>
         </a>
-        <a class="skill-card" href="docs/competitive.html">
-          <div class="sk-top"><span class="sk-n">02</span><span class="sk-tag">MMU</span></div>
+        <div class="skill-card">
+          <div class="sk-top"><span class="sk-n">02</span><span class="sk-tag">MMU · 画见未来</span></div>
           <h3>竞品分析</h3>
-          <p>跨赛道调研 27 款竞品，拆成功证据 / 留存机制 / 变现方式，提炼三条冷启动铁律，反推自己该做什么。</p>
-          <div class="sk-doc"><span>《MMU · 跨赛道 27 竞品调研》</span><span class="go">查看 →</span></div>
-        </a>
+          <p>两种品类、两种打法：既能从成功证据反推功能弹药库，也能用差异化维度画定位矩阵、找唯一空白角。</p>
+          <div class="sk-docs">
+            <a class="sk-doc-row" href="docs/competitive.html"><span>《MMU · 跨赛道 27 竞品调研》</span><span class="go">查看 →</span></a>
+            <a class="sk-doc-row" href="docs/competitive-drawahead.html"><span>《画见未来 · 定位矩阵竞品分析》</span><span class="go">查看 →</span></a>
+          </div>
+        </div>
         <a class="skill-card" href="docs/prd.html">
           <div class="sk-top"><span class="sk-n">03</span><span class="sk-tag">MMU</span></div>
           <h3>产品需求文档 PRD</h3>
-          <p>直接对接开发的 PRD：整体闭环流程图、功能优先级与依赖、输出数据结构、埋点事件表。</p>
-          <div class="sk-doc"><span>《MMU · 首炮功能设计 PRD》</span><span class="go">查看 →</span></div>
-        </a>
-        <a class="skill-card" href="docs/mvp-validation.html">
-          <div class="sk-top"><span class="sk-n">04</span><span class="sk-tag">MMU</span></div>
-          <h3>MVP 与增长验证</h3>
-          <p>不实现完整产品，用最轻的钩子快速上线，定义可证伪的假设与埋点体系，明确 YAGNI 不做什么。</p>
-          <div class="sk-doc"><span>《妆签 · 传播验证 MVP 设计》</span><span class="go">查看 →</span></div>
+          <p>按 prd-development 规范写的 10 段式完整 PRD：问题 → 画像 → 方案（含用户流程图）→ 北极星 / 护栏指标 → 用户故事 → 依赖与风险，数据来自 150 人内测。</p>
+          <div class="sk-doc"><span>《MMU · 产品需求文档 PRD》</span><span class="go">查看 →</span></div>
         </a>
         <a class="skill-card" href="docs/beta-report.html">
-          <div class="sk-top"><span class="sk-n">05</span><span class="sk-tag">MMU</span></div>
+          <div class="sk-top"><span class="sk-n">04</span><span class="sk-tag">MMU</span></div>
           <h3>数据验证与复盘</h3>
           <p>用行为埋点 + 问卷把定位假设量化验证：PMF 信号、核心转化漏斗、功能好评、定价与商业模式测试。</p>
           <div class="sk-doc"><span>《MMU · 150 人内测报告》</span><span class="go">查看 →</span></div>

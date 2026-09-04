@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PRD · MMU 首炮功能详细设计 · 马天宇</title>
-<meta name="description" content="MMU 首炮功能详细设计 PRD，含闭环流程图、优先级矩阵与埋点方案">
+<title>PRD · MMU 产品需求文档 · 马天宇</title>
+<meta name="description" content="MMU 产品需求文档 PRD：10 段式结构，含问题、画像、方案流程图、成功指标与风险">
 <style>
   :root{--navy:#244884;--navy-deep:#1C3A6E;--navy-soft:#E7ECF5;--navy-tint:#F3F6FB;--ink:#1F2733;--ink-soft:#3C4757;--ink-faint:#7C8797;--paper:#fff;--bg:#EBEEF3;--line:#DEE4EC;--warn:#B4541A}
   *{box-sizing:border-box}
@@ -58,570 +58,290 @@
   <div class="topbar"><span class="crumb"><b>马天宇</b> · 产品经理基本功 / 产品需求文档 PRD</span><a class="back" href="../#skills">← 返回作品集</a></div>
   <header class="hero">
     <p class="eyebrow">Product Requirements Doc</p>
-    <h1>MMU 首炮功能详细设计（工程对接版 PRD）</h1>
-    <div class="meta"><span>产品 MMU</span><span>类型 PRD</span><span>1 PM + 2 开发</span></div>
-    <p class="note">直接用于开发排期的 PRD：整体闭环流程图、功能优先级与依赖、输出数据结构、埋点事件表，命门功能标注「先联调」。</p>
+    <h1>MMU 产品需求文档（与内测、Demo 同一版）</h1>
+    <div class="meta"><span>产品 MMU</span><span>类型 PRD · 10 段式</span><span>1 PM + 2 开发</span></div>
+    <p class="note">按 prd-development 规范写的完整 PRD：执行摘要 → 问题 → 用户画像 → 战略 → 方案（含用户流程图）→ 成功指标（北极星/护栏）→ 用户故事 → 范围外 → 依赖与风险 → 待解问题；数据来自 150 人内测。</p>
   </header>
-  <div class="banner">📄 <b>真实工作文档</b>，直接取自项目过程，仅做排版渲染、未为作品集重新包装。</div>
+  <div class="banner">📄 <b>真实工作文档</b>，直接取自项目过程，仅做排版渲染、未为作品集重新包装。 依据 prd-development 规范撰写，整合项目真实竞品调研、内测数据与功能规格。</div>
   <div class="doc">
-<h1>MMU 首炮「自拍看穿版」功能详细设计（工程对接版）</h1>
+<h1>MMU 产品需求文档（PRD）</h1>
+<blockquote>
+<p>依据 <code>prd-development</code> 规范撰写，整合本项目真实的市场竞品调研、150 人内测数据与产品功能规格。
+本 PRD 对应「用自己已有的化妆品、跟 AI 一步步化出好妆容」这版 MMU（内测与 Demo 同一版），不含后续「自拍看穿」冷启动 pivot。</p>
+</blockquote>
+<h2>文档信息</h2>
 <div class="tw"><table>
 <thead>
 <tr>
 <th>版本</th>
 <th>日期</th>
+<th>作者</th>
+<th>变更说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td>2026-06</td>
+<td>马天宇（产品负责人）</td>
+<td>内测结论回填后的定稿版</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>团队</strong>：1 PM + 2 开发</li>
+<li><strong>状态</strong>：内测验证完成（PMF 信号成立），未公开上线</li>
+</ul>
+<hr />
+<h2>1. 执行摘要</h2>
+<p>我们为<strong>买了一堆化妆品却不会用的化妆新手</strong>做一款 App（MMU），解决他们「<strong>买了不会用、用时找不到、教程和手里的产品不匹配</strong>」的核心痛点。做法是：识别用户<strong>已经拥有</strong>的化妆品建立数字化妆台，基于这些产品用 AI 生成适配妆容，再用<strong>分步教学</strong>手把手教用户化出来。预期结果是把「不会用」转化为「用得上」，用「结构化教学交付」而非「卖货种草」建立差异化，跑通「SaaS 订阅 + 美妆电商 CPS」的商业模式。</p>
+<p>一句话：<strong>我们为化妆新手做「基于已有产品的 AI 分步化妆教学」，解决「买了不会用」，从而把闲置化妆品盘活成可持续的订阅与导购价值。</strong></p>
+<hr />
+<h2>2. 问题陈述</h2>
+<h3>谁有这个问题</h3>
+<p>化妆新手与进阶用户——尤其是已经囤了不少化妆品、但化妆技术跟不上的女性用户。</p>
+<h3>问题是什么</h3>
+<p>用户最大的痛点<strong>不是「没有好产品」，而是「买了不会用、用时找不到、跟着教程也化不出同样效果」</strong>。市面产品几乎都在解决「卖货」，很少有人解决「教你用<strong>已经拥有</strong>的化妆品化好一个妆」。</p>
+<h3>为什么痛</h3>
+<ul>
+<li><strong>白领</strong>：早上时间紧张找不到产品、经常重复购买、网上教程用的产品和自己手里的对不上。</li>
+<li><strong>下沉市场用户</strong>：化妆技术差，不知道怎么用现有产品，容易被种草冲动购买。</li>
+<li><strong>学生</strong>：预算有限，买了不会用，也不知道不同场合该化什么妆。</li>
+</ul>
+<h3>证据</h3>
+<ul>
+<li>竞品调研（4 大渠道、跨赛道 27 款）显示：市场结构性地「<strong>重销售、轻教学</strong>」，没有一款产品「基于你手上的化妆品、分步骤带你化妆」。</li>
+<li>内测问卷验证：用户对「分步教学」好评率 <strong>92.19%</strong>，是最强的痛点命中信号。</li>
+</ul>
+<hr />
+<h2>3. 目标用户与画像</h2>
+<h3>主画像 · 一二线城市白领（内测占比 52.0%）</h3>
+<ul>
+<li><strong>人群</strong>：25–45 岁，月收入 8k–20k，分布北上广深及新一线。</li>
+<li><strong>现状行为</strong>：人均拥有 <strong>23 件</strong>美妆产品，<strong>37% 拥有超 5 件未开封产品</strong>。</li>
+<li><strong>痛点</strong>：早上找不到产品、重复购买、教程与手里产品不匹配。</li>
+<li><strong>对应方案</strong>：数字化妆台（内测 85.16% 认可分类清晰）+ 基于现有产品的 AI 妆容匹配，盘活闲置、杜绝重复购买。</li>
+</ul>
+<h3>次画像</h3>
+<ul>
+<li><strong>下沉市场女性（34.7%）</strong>：18–30 岁，月收入 3k–8k，人均 12 件产品，对「性价比 / 实用性」极敏感 → 分步教学替代盲目种草。</li>
+<li><strong>学生（10.2%）</strong>：18–24 岁，月生活费 1.5k–3k，人均 8 件，时间充裕、乐于尝鲜，是口碑裂变的核心引擎 → 场景化妆容（通勤 / 约会 / 面试）在有限预算内做效果最大化。</li>
+</ul>
+<h3>用户要完成的任务（Jobs-to-Be-Done）</h3>
+<ul>
+<li>当我<strong>面对一堆化妆品不知道怎么组合</strong>时，我想要一个<strong>基于我已有产品的妆容方案</strong>，好让我不用再额外买东西就能化好一个妆。</li>
+<li>当我<strong>跟着网上教程化不出效果</strong>时，我想要<strong>一步步只告诉我这一步用哪支、怎么涂</strong>，好让我真的能复现。</li>
+</ul>
+<hr />
+<h2>4. 战略背景</h2>
+<h3>业务目标</h3>
+<p>用「结构化教学交付」切入美妆赛道，先验证核心价值（教会用户化好一个妆），再在价值验证之上做商业化，跑通「教学订阅做留存 + 电商分佣做变现」的双轮模式。</p>
+<h3>市场机会</h3>
+<p>美妆是高频、高客单的大众需求；「基于已有产品的教学」是竞品普遍忽略的结构性空白。</p>
+<h3>竞品格局</h3>
+<ul>
+<li><strong>电商导购型</strong>：解决「买什么」，不解决「怎么用」。</li>
+<li><strong>泛美妆内容型</strong>：内容泛化，不针对用户手里的具体产品。</li>
+<li><strong>结论</strong>：无人占据「用你已有的产品、分步教你化好一个妆」这个位置——即 MMU 的差异化入口。</li>
+</ul>
+<h3>为什么是现在</h3>
+<p>多模态视觉模型已能做到「识别产品 + 基于产品生成妆容 + 分步指导」，此前纯人工内容无法规模化的教学交付，现在有了技术可行性。</p>
+<hr />
+<h2>5. 方案概述</h2>
+<h3>方案描述</h3>
+<p>把 AI 能力落到「<strong>识别已有化妆品 → 生成适配妆容 → 分步骤实时指导 → 完成度反馈</strong>」这条主链路上。MVP 阶段主动砍掉社区、商城等非核心模块，只保留「分步教学」主链路，确保最快验证核心假设。</p>
+<pre class="mermaid">flowchart LR
+    A[&quot;识别已有化妆品&lt;br/&gt;扫码/拍照/文字录入&quot;] --&gt; B[&quot;数字化妆台&lt;br/&gt;分类·成分·保质期·余量&quot;]
+    B --&gt; C[&quot;输入场景与偏好&lt;br/&gt;通勤/约会 · 难度 · 限制&quot;]
+    C --&gt; D[&quot;AI 生成适配妆容&lt;br/&gt;基于现有产品·三路召回重排&quot;]
+    D --&gt; E[&quot;分步骤实时指导&lt;br/&gt;每步用哪支·怎么涂&quot;]
+    E --&gt; F[&quot;完成度反馈 / 妆后总结&lt;br/&gt;记录·复盘·下次建议&quot;]
+    F -.回流.-&gt; B</pre>
+<h3>核心功能（按模块，摘自产品功能规格）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>模块</th>
+<th>关键功能</th>
+<th>交付的价值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>一、美妆资产数字化</strong></td>
+<td>扫码/拍照/文字录入、产品搜索匹配、开封/未开封保质期、余量记录、成分分析、化妆台分类管理</td>
+<td>盘活闲置、杜绝重复购买、看清手里有什么</td>
+</tr>
+<tr>
+<td><strong>二、用户画像</strong></td>
+<td>肤质/肤色/敏感/熟练度资料、历史妆容与使用记录</td>
+<td>让推荐锚定「这个人 + 这些产品」</td>
+</tr>
+<tr>
+<td><strong>三、AI 妆容推荐</strong></td>
+<td>基于「用户画像—产品库—场景风格」三路召回与重排，只推荐用现有产品能完成的妆容</td>
+<td>不用额外买东西就能化好一个妆</td>
+</tr>
+<tr>
+<td><strong>四、分步教学</strong></td>
+<td>妆容拆成分步骤、每步指定产品与手法、实时指导</td>
+<td>真的能复现（好评 92.19%，核心壁垒）</td>
+</tr>
+<tr>
+<td><strong>五、妆后总结</strong></td>
+<td>记录日期/产品/步骤/耗时、余量快速更新、下次建议</td>
+<td>形成「学 → 做 → 改」闭环、沉淀复购数据</td>
+</tr>
+</tbody>
+</table></div>
+<h3>关键用户流</h3>
+<p>落地 → 录入/识别已有产品 → 建立化妆台 → 选场景与偏好 → AI 出妆容方案 → 进入分步教学（可选自拍试妆预览）→ 完成后妆后总结 → 回流到化妆台。</p>
+<hr />
+<h2>6. 成功指标</h2>
+<h3>北极星指标</h3>
+<p><strong>核心场景启动率</strong>（看到心仪妆容后真正开始跟妆的比例）。内测实测 <strong>71.89%</strong>——验证「一旦看到心仪妆容，立刻动手」的意愿极强，是 PMF 的核心信号。</p>
+<h3>次级指标</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>指标</th>
+<th>内测实测</th>
 <th>说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>v2.0</td>
-<td>2026-07-01</td>
-<td>改回工程对接向：砍掉战略对齐框架（问题陈述/画像/风险模型），按优先级重排功能详细设计，直接用于开发排期</td>
+<td>推荐意愿（NPS 代理）</td>
+<td>89.06%</td>
+<td>口碑与裂变潜力</td>
+</tr>
+<tr>
+<td>分步教学好评率</td>
+<td>92.19%</td>
+<td>核心体验与留存抓手</td>
+</tr>
+<tr>
+<td>化妆台分类清晰认可</td>
+<td>85.16%</td>
+<td>资产数字化的可用性</td>
+</tr>
+<tr>
+<td>推荐入口点击率</td>
+<td>71.38%</td>
+<td>前端吸引力</td>
 </tr>
 </tbody>
 </table></div>
-<blockquote>
-<p>团队：1 PM + 2 开发。首炮范围、决策依据见《首炮功能边界-定稿》，本文只讲"怎么做"。
-优先级标注：⭐⭐ = 命门，必须做扎实、优先联调；⭐ = 重要；无标注 = 常规实现即可。</p>
-</blockquote>
+<h3>护栏指标</h3>
+<p><strong>完整跟妆完成率</strong>：内测仅 <strong>24.23%</strong>（漏斗：曝光 1520 → 点击 1085 → 启动 780 → 完成 189）。前端极具吸引力、后端流失严重，主因是当前 MVP 的 AI 渲染时长与单次视频过长——不是需求伪命题，而是工程体验问题，需以「断点续妆 / 缩短单步」优化。</p>
 <hr />
-<h2>0. 整体闭环（先看这张图，再看分功能细节）</h2>
-<pre class="mermaid">flowchart TD
-    A[&quot;①落地页看样例卡&lt;br/&gt;点击「上传自拍」&quot;] --&gt; B[&quot;②拍照/相册选图&quot;]
-    B --&gt; C[&quot;③预览确认&quot;]
-    C --&gt; D{&quot;前置校验&quot;}
-    D --&gt;|无人脸/多人脸| E[&quot;硬性拦截&lt;br/&gt;提示重传&quot;]
-    E --&gt; B
-    D --&gt;|过暗/过糊| F{&quot;软提示&quot;}
-    F --&gt;|重新上传| B
-    F --&gt;|仍然继续| G[&quot;④等待&lt;br/&gt;（趣味 loading 文案）&quot;]
-    D --&gt;|通过| G
-    G --&gt; H[&quot;调用看穿引擎生成结果&quot;]
-    H --&gt; I{&quot;生成是否成功&quot;}
-    I --&gt;|失败/超时/异常| J[&quot;触发兜底&lt;br/&gt;（用户无感知）&quot;]
-    I --&gt;|成功| K[&quot;⑤渲染身份卡&quot;]
-    J --&gt; K
-    K --&gt; L[&quot;⑥保存 / 生成海报 / 转发&quot;]
-    K --&gt; M[&quot;⑦（可选）发起互测&quot;]
-    M -.-&gt; N[&quot;见 §6 互测时序图&quot;]</pre>
-<p><strong>功能清单与优先级</strong>（建议开发顺序也按这个来，因为后面模块依赖前面）：</p>
+<h2>7. 用户故事与需求</h2>
+<h3>Epic 假设</h3>
+<blockquote>
+<p>如果我们让用户<strong>基于已有产品</strong>拿到 AI 妆容并被<strong>分步骤</strong>带着化，那么新手就能真正化好一个妆，从而愿意推荐并为「教学订阅 + 精准导购」付费。</p>
+</blockquote>
+<h3>用户故事（节选，MoSCoW）</h3>
+<ul>
+<li><strong>Must</strong>：作为白领用户，我想扫码/拍照录入我的化妆品，以便建立我的数字化妆台。</li>
+<li><strong>Must</strong>：作为新手，我想拿到只用我现有产品就能完成的妆容方案，以便不额外花钱就能化妆。</li>
+<li><strong>Must</strong>：作为新手，我想被一步步告诉每步用哪支、怎么涂，以便真的能复现妆容。</li>
+<li><strong>Should</strong>：作为用户，我想在跟妆中途退出后能断点续妆，以便不因单次过长而放弃。</li>
+<li><strong>Should</strong>：作为用户，我想看到产品成分与保质期，以便安全、及时地用掉手里的产品。</li>
+<li><strong>Could</strong>：作为用户，我想做自拍试妆预览，以便先看到大致效果再开始。</li>
+</ul>
+<h3>约束与边界情况</h3>
+<ul>
+<li>录入是低频动作，<strong>「录入劝退 × 低频 = 留存陷阱」是明确风险</strong>（竞品侧已被独立验证），第一版录入必须做到极简、可跳过、可后补。</li>
+<li>自拍相关能力遵守合规底线：不打分、非医疗/诊断、阅后即焚不存原图。</li>
+</ul>
+<hr />
+<h2>8. 范围外</h2>
+<h3>本期不做</h3>
+<ul>
+<li>社区/UGC、内置商城、2.5D 虚拟化妆台的重交互形态、真人换脸级试妆——第一版一律不做，避免拉长上线、稀释核心验证。</li>
+</ul>
+<h3>未来考虑</h3>
+<ul>
+<li>空瓶复购提醒、保质期营销（依赖化妆台沉淀的数据）。</li>
+<li>电商 CPS 深度选品、会员精准色彩诊断等付费深度功能。</li>
+<li>针对冷启动/传播的更轻钩子（后续「自拍看穿」pivot 即由此而来）。</li>
+</ul>
+<hr />
+<h2>9. 依赖与风险</h2>
+<h3>依赖</h3>
+<ul>
+<li>多模态视觉模型（产品识别 + 基于产品的妆容生成）。</li>
+<li>产品库/成分库/妆容模板库的建设（重资产，直接影响上线成本）。</li>
+</ul>
+<h3>风险与缓解</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>风险</th>
+<th>影响</th>
+<th>缓解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>录入劝退导致留存差</td>
+<td>用户建不起化妆台，后续推荐无从谈起</td>
+<td>录入极简化、可跳过；先用轻资产钩子拉人，录入后置</td>
+</tr>
+<tr>
+<td>AI 渲染时长长 → 完成率低（实测 24%）</td>
+<td>核心体验断在最后一公里</td>
+<td>断点续妆、缩短单步视频、异步生成</td>
+</tr>
+<tr>
+<td>建库前置成本高，无法快速验证</td>
+<td>上线慢、烧钱</td>
+<td>MVP 先做最小产品库 + 手工兜底；用轻 MVP 验证需求再投入建库</td>
+</tr>
+<tr>
+<td>冷启动/传播弱</td>
+<td>有 PMF 信号但拉不到量</td>
+<td>后续以更轻的可分享钩子做冷启动（pivot 依据）</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>10. 待解问题</h2>
 <div class="tw"><table>
 <thead>
 <tr>
 <th>#</th>
-<th>功能</th>
-<th>优先级</th>
-<th>依赖</th>
+<th>问题</th>
+<th>归属</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>1</td>
-<td>看穿引擎（§1）</td>
-<td>⭐⭐ 命门，先联调这个</td>
-<td>无（纯后端服务，可独立开发）</td>
+<td>断点续妆能把完成率从 24% 提到多少？需 A/B 验证</td>
+<td>🔵 待验证</td>
 </tr>
 <tr>
 <td>2</td>
-<td>身份卡渲染（§2）</td>
-<td>⭐⭐ 命门</td>
-<td>依赖 §1 输出</td>
+<td>第一版产品库覆盖多少 SKU 才够撑起「基于已有产品」的体验？</td>
+<td>🔵 待验证</td>
 </tr>
 <tr>
 <td>3</td>
-<td>自拍上传 + 前置校验（§3）</td>
-<td>⭐</td>
-<td>无</td>
+<td>主力价格带落在 19.9 元以下（内测 70.31%），订阅与 CPS 如何配比？</td>
+<td>🔶 假设</td>
 </tr>
 <tr>
 <td>4</td>
-<td>落地引导页（§4）</td>
-<td>常规</td>
-<td>无，可最后做</td>
-</tr>
-<tr>
-<td>5</td>
-<td>分享/裂变（§5）</td>
-<td>⭐</td>
-<td>依赖 §2</td>
-</tr>
-<tr>
-<td>6</td>
-<td>闺蜜互测（§6）</td>
-<td>⭐ 工程量最大</td>
-<td>依赖 §1 输出（AI 结果对比）</td>
-</tr>
-<tr>
-<td>7</td>
-<td>使用次数限制与变现门槛（§7）</td>
-<td>⭐ 新增</td>
-<td>依赖 §3（在上传前触发）+ 广告位/支付商户号（外部审核，今天就要申请）</td>
+<td>录入环节能否用「拍一张化妆包整体照」批量识别，绕开逐件录入？</td>
+<td>🔵 待探索</td>
 </tr>
 </tbody>
 </table></div>
 <hr />
-<h2>1. 看穿引擎 ⭐⭐（命门）</h2>
-<p><strong>做什么</strong>：输入一张自拍，调多模态视觉模型，输出一份结构化"洞察结果"。不打分、不做诊断，靠话术工程制造"被看穿感"。</p>
 <blockquote>
-<p>⚠️ 下面 1.1-1.6 的字段名、JSON 结构、system prompt 细节都是<strong>参考草案</strong>，跟着 §1.2 人设标签库一样待正式设计，不用今晚就抠死具体字段——开发先按这个大致结构跑通联调即可，字段增减、命名后面都可以改。真正不用等、今晚要落实的是 <strong>§8 数据埋点</strong>里的事件列表，这个不受内容设计影响，可以直接按那张表埋。</p>
+<p>附：本 PRD 的数据来自《MMU 内测报告——商业价值验证》（150 名种子用户 + 128 份问卷），功能来自《MMU 产品功能表》，竞品结论来自《美妆 AI 跨赛道竞品调研》。</p>
 </blockquote>
-<h3>1.1 输出数据结构（参考草案，不用抠细节）</h3>
-<pre><code class="language-json">{
-  &quot;face_features&quot;: {
-    &quot;face_shape&quot;: &quot;enum: 圆脸/方脸/长脸/心形脸/鹅蛋脸&quot;,
-    &quot;eye_shape&quot;: &quot;string&quot;, &quot;brow_style&quot;: &quot;string&quot;, &quot;lip_style&quot;: &quot;string&quot;,
-    &quot;skin_tone_tier&quot;: &quot;enum: 白皙/中等/健康小麦/深&quot;,
-    &quot;expression_vibe&quot;: &quot;string&quot;, &quot;style_read&quot;: &quot;string&quot;
-  },
-  &quot;persona_tag&quot;: &quot;enum，见 1.2&quot;,
-  &quot;anchor_line&quot;: &quot;外貌锚点一句话，必须引用图中可验证细节&quot;,
-  &quot;first_impression&quot;: &quot;第一印象文案，80-120字&quot;,
-  &quot;contrast_insight&quot;: { &quot;misconception&quot;: &quot;大家对你的第一印象&quot;, &quot;reality&quot;: &quot;但实际上……&quot; },
-  &quot;quote&quot;: &quot;金句，第二人称，15-25字，可独立截图&quot;,
-  &quot;makeup_direction&quot;: &quot;落位一行妆容方向&quot;,
-  &quot;rarity_pct&quot;: &quot;非模型输出，后端计算注入，见 1.4&quot;
-}
-</code></pre>
-<p><code>face_features</code> 是内部字段，不直接展示给用户，只用来生成 <code>anchor_line</code>/<code>makeup_direction</code> 和后续统计。</p>
-<h3>1.2 人设标签库 ⚠️ 待设计（下表是占位草案，非最终版）</h3>
-<p>以下 8 个标签、定义关键词、专属色卡直接继承自《妆签 MVP》的经验列表，<strong>没有经过针对本产品的重新设计和验证</strong>，先当占位草案给今晚开发用（数量 8 个不变，见前面讨论），但具体标签内容、定义关键词、色卡搭配都<strong>待正式设计</strong>，不代表已经拍板：</p>
-<div class="tw"><table>
-<thead>
-<tr>
-<th>人设标签（占位）</th>
-<th>定义关键词（占位）</th>
-<th>专属色卡（占位）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>清冷氛围挂</td>
-<td>疏离感、高级感</td>
-<td>雾霾蓝、豆沙灰</td>
-</tr>
-<tr>
-<td>甜辣御姐挂</td>
-<td>攻气、反差萌</td>
-<td>正红、酒红</td>
-</tr>
-<tr>
-<td>纯欲挂</td>
-<td>无辜感、软糯</td>
-<td>蜜桃粉、珊瑚橘</td>
-</tr>
-<tr>
-<td>复古港风挂</td>
-<td>浓颜、精致</td>
-<td>大地棕、复古红</td>
-</tr>
-<tr>
-<td>元气少女挂</td>
-<td>活力、亲和</td>
-<td>蜜柑橙、樱花粉</td>
-</tr>
-<tr>
-<td>欧美高级挂</td>
-<td>立体、大气</td>
-<td>焦糖色、深咖</td>
-</tr>
-<tr>
-<td>温柔氧气挂</td>
-<td>治愈、柔和</td>
-<td>燕麦色、奶茶色</td>
-</tr>
-<tr>
-<td>酷飒中性挂</td>
-<td>利落、少攻击性锋芒</td>
-<td>藕荷紫、雾灰蓝</td>
-</tr>
-</tbody>
-</table></div>
-<blockquote>
-<p>开发先按这份草案接口（enum 8 个值 + 对应色卡）联调，<strong>枚举值本身用字符串常量、别写死在业务逻辑里</strong>，方便后面正式设计定稿后直接替换值，不用改代码结构。正式设计怎么定，见 §1.7 的两条路径讨论。</p>
-</blockquote>
-<h3>1.3 System Prompt 约束（PM 提供初版，需要真机测试迭代）</h3>
-<ul>
-<li>正向措辞、非诊断、<strong>不打分</strong>（不允许出现"X 分"这种表述）</li>
-<li><code>persona_tag</code> 必须从上表 8 个枚举里选一个，不能自造</li>
-<li><code>anchor_line</code> 必须包含至少一个可从照片验证的具体细节词（如"眼尾上扬""下颌线利落"），不能空泛</li>
-<li><code>contrast_insight</code> 走"误解框架"：<code>misconception</code> 写外在气质刻板印象，<code>reality</code> 转折到细节反差，语气必须是<strong>惊喜发现</strong>，不能是否定/冒犯——这条不需要用户输入任何自评信息，全部由模型从照片判断给出</li>
-<li><code>quote</code> 第二人称、15-25 字、可独立截图</li>
-<li><strong>禁用词表</strong>：算命/命运/运势/宜忌/占卜/面相（命理类）；丑/差/缺陷（负面类）；诊断/疾病/治疗（医疗类）；X 分/打分（评分类）</li>
-</ul>
-<h3>1.4 稀缺感计算（rarity_pct）</h3>
-<p>后端维护各 <code>persona_tag</code> 历史命中计数，取"占比较小的一侧"展示；若某标签命中率超过 50%，展示口径改为"仅 X% 是高频型"。首炮直接用简单的定时批处理（比如每小时跑一次统计）就行，不需要实时。</p>
-<h3>1.5 异常与兜底（这条是底线，必须实现）</h3>
-<div class="tw"><table>
-<thead>
-<tr>
-<th>场景</th>
-<th>处理</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>模型调用超时</td>
-<td>重试 1 次 → 仍失败走「保底人设」：按 face_features 粗特征弱匹配最接近标签，套用预置默认文案出卡</td>
-</tr>
-<tr>
-<td>返回不符合上面的 JSON 结构</td>
-<td>重新请求 1 次 → 仍失败走保底人设</td>
-</tr>
-<tr>
-<td>persona_tag 不在 8 个枚举内</td>
-<td>模型另返回一个"最接近的既有风格"辅助字段，后端做映射；映射不到走保底人设</td>
-</tr>
-<tr>
-<td>命中禁用词</td>
-<td>重新生成 1 次 → 仍命中则替换成预置安全文案</td>
-</tr>
-</tbody>
-</table></div>
-<p><strong>原则：宁可不个性化，也不能不出卡。这条是产品能不能用的底线，务必优先测试这个分支。</strong></p>
-<h3>1.6 待确认（今天先给个默认值，别卡在这里）</h3>
-<ul>
-<li>模型选型 + 响应时间：先选定一个可用的多模态模型跑通，目标响应时间先按 ≤8 秒设计等待态，后面根据实测再调</li>
-<li>这块建议先跑通再优化话术准度，准度校准是持续迭代的事，不阻塞今晚的联调</li>
-</ul>
-<h3>1.7 人设标签背后的判断维度（不阻塞今晚，先记录设计思路，后续验证）</h3>
-<p>现在的设计是：§1.1 提取 7 个原始视觉维度（脸型/眼型/眉形/唇形/肤色档/神态/穿搭风格）后，<strong>由模型整体判断</strong>直接给出 1 个 persona_tag，中间没有一套显式的"维度组合公式"——不像 MBTI 是 4 个独立二元维度严格组合出 16 型（2⁴）。这是自拍版的有意选择：整体判断更贴近"AI 在看你"的巴纳姆式体验，而不是"套公式算你"。</p>
-<p><strong>如果想让判断更一致、可复现</strong>，可以补一套显式维度规则，思路是找 3 个正交二元轴，2³=8 刚好对应现在的 8 个标签：</p>
-<ul>
-<li><strong>温度感</strong>：冷 / 暖</li>
-<li><strong>浓淡感</strong>：浓郁强势 / 清淡内敛</li>
-<li><strong>软硬度</strong>：锐利 / 柔和</li>
-</ul>
-<p><strong>⚠️ 如实说明一个问题</strong>：现有这 8 个标签是从《妆签 MVP》直接继承的经验列表，不是从这 3 个轴推导出来的，<strong>尝试往回套的时候有明显冲突</strong>——比如"元气少女挂"和"温柔氧气挂"用这套轴去分都落在"暖+柔"附近，区分度不够；"复古港风挂"和"甜辣御姐挂"也有类似重叠。也就是说，<strong>这 8 个标签目前不是一套干净的正交维度体系</strong>，勉强拿三轴去套会产生歧义，不能直接拿来当查表规则用。</p>
-<p><strong>两条后续路径（哪条都不用今晚做）</strong>：
-1. <strong>轻量方案</strong>：把"温度感/浓淡感/软硬度"这 3 条只当成 system prompt 里给模型的<strong>判断辅助提示</strong>（"依次考虑温度感、浓淡感、软硬度，再从 8 个标签里选最接近的"），不做成硬编码查表，能提升一些一致性，但不解决标签本身有重叠的问题。
-2. <strong>重设计方案</strong>：以后如果真要做成 MBTI 那种严格的"维度组合"体系，需要<strong>重新设计这 8 个标签本身</strong>，让它们对齐到干净的正交轴上（而不是现在这样反向拿轴去套一份已经写好的经验列表），这是内容侧的一次改版，工作量不小，放 V1.1 评估要不要做。</p>
-<hr />
-<h2>2. 身份卡渲染 ⭐⭐（命门，传播单元）</h2>
-<p><strong>做什么</strong>：把 §1 的输出渲染成一张可截图分享的卡片（小程序 Canvas）。</p>
-<p><strong>信息层级</strong>（从上到下）：</p>
-<div class="tw"><table>
-<thead>
-<tr>
-<th>层级</th>
-<th>内容</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>人设标签大字（如"清冷氛围挂"）—— 最大字号</td>
-</tr>
-<tr>
-<td>2</td>
-<td>金句 —— 独立区域，方便只截这一句</td>
-</tr>
-<tr>
-<td>3</td>
-<td>外貌锚点一句话</td>
-</tr>
-<tr>
-<td>4</td>
-<td>反差洞察（误解 + 反差两句）</td>
-</tr>
-<tr>
-<td>5</td>
-<td>妆容方向一行</td>
-</tr>
-<tr>
-<td>6</td>
-<td>稀缺感标注（"只有 X% 是清冷氛围挂"）</td>
-</tr>
-<tr>
-<td>7</td>
-<td>底部分享区 + 小程序码</td>
-</tr>
-</tbody>
-</table></div>
-<p><strong>示例（直接照这个做视觉稿）</strong>：</p>
-<blockquote>
-<p><strong>清冷氛围挂</strong> ·「你安静的时候，气场比说话时更响。」
-锚点：眼尾微微上扬，笑起来才露出一点软。
-反差：大家对你的第一印象是很飒很难接近，但你笑起来时眼睛会先弯——这种反差感很戳人。
-妆容方向：淡雾感底妆 + 豆沙灰眼影，别加太多暖调。
-只有 17% 的人被判定为清冷氛围挂。</p>
-</blockquote>
-<p><strong>技术要求</strong>：Canvas 渲染，主流 iOS/Android 微信客户端真机测试保存图/截图不错位、不截断（这条必须测，卡片是唯一的传播载体）。</p>
-<p><strong>卡片可点开详情页</strong>（原型 A7）：结果页的简版卡整卡可点击，展开"完整解读"详情页——<code>first_impression</code>（80-120 字第一印象全文）<strong>只在详情页展示</strong>，简版卡不放（保持一屏可截图的克制）。详情页同样挂分享三件套。分层逻辑：<strong>简版卡 = 传播用，详情页 = 价值兑现</strong>。埋点 <code>card_detail_view</code>。</p>
-<hr />
-<h2>3. 自拍上传 + 前置校验 ⭐</h2>
-<blockquote>
-<p>在"选照片"这一步之前，先过 §7 的使用次数门槛检查（第 1 次直接放行，第 2 次起需要解锁）。</p>
-</blockquote>
-<div class="tw"><table>
-<thead>
-<tr>
-<th>步骤</th>
-<th>交互</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>选照片</td>
-<td>微信原生 <code>chooseMedia</code>（拍照/相册二选一）</td>
-</tr>
-<tr>
-<td>预览确认</td>
-<td>本地预览 +「确认，开始看穿」/「重新选择」</td>
-</tr>
-<tr>
-<td>前置校验</td>
-<td>见下表</td>
-</tr>
-</tbody>
-</table></div>
-<div class="tw"><table>
-<thead>
-<tr>
-<th>校验结果</th>
-<th>提示文案</th>
-<th>阻断力度</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>无人脸</td>
-<td>"没看清你的脸呀，换张露脸的照片试试～"</td>
-<td><strong>硬性阻断</strong>，必须重传</td>
-</tr>
-<tr>
-<td>多人脸</td>
-<td>"这张照片不止一张脸，选一张只有你自己的吧～"</td>
-<td><strong>硬性阻断</strong>，必须重传</td>
-</tr>
-<tr>
-<td>过暗/过糊</td>
-<td>"这张照片有点暗/模糊，可能影响看穿效果，要不要换一张？"</td>
-<td><strong>软提示</strong>，给【重传】【仍然继续】两个按钮</td>
-</tr>
-<tr>
-<td>通过</td>
-<td>—</td>
-<td>直接进入等待态</td>
-</tr>
-</tbody>
-</table></div>
-<p>过暗/过糊的判定算法由开发自行选型（简单的亮度/清晰度检测即可，不需要额外调模型），阈值先给个粗略值，上线后再调。</p>
-<hr />
-<h2>4. 落地引导页 + 全局导航「我的」</h2>
-<p><strong>4.1 落地引导页</strong>
-- 首屏：1-2 张样例卡（先拿 §2 的示例卡片当素材）+「上传自拍」大按钮 + 底部一句隐私说明（"你的照片仅用于本次生成，用完即焚，不会被保存"，点击展开完整条款）
-- 从互测邀请链接进来的用户<strong>不经过这个页面</strong>，直接进 §6 的投票页</p>
-<p><strong>4.2 底部 tabBar + 「我的」页</strong>（原型 D1）
-- tabBar 两个 tab：<strong>看穿</strong>（落地引导页）/ <strong>我的</strong>。仅 tab 页显示，流程中间页（上传/等待/结果）无 tabBar（小程序原生行为）。
-- 「我的」页是<strong>轻量版</strong>，只放三样东西：
-  1. <strong>我的风格卡</strong>（仅最近一张，重测覆盖）→ 点开进 §2 的详情页
-  2. <strong>我的互测入口</strong>（"5 位朋友已投 · 查看"）→ 进互测结果页。这就是<strong>拒绝推送授权用户的手动回访路径</strong>，解决了之前遗留的开放问题
-  3. <strong>再测一次</strong>按钮（第 2 次起走 §7 解锁门槛）
-- 空态：没测过 → "还没有风格卡，去测一张"引导去落地页
-- <strong>边界（防蔓延）</strong>：无收藏、无历史列表、无档案沉淀——那些是 V1.1「我的形象档案」的事，这里只是"最近一张卡 + 互测回访"的最小入口，开发不要做重。
-- 埋点 <code>my_page_view</code>。</p>
-<hr />
-<h2>5. 分享 / 裂变 ⭐</h2>
-<div class="tw"><table>
-<thead>
-<tr>
-<th>动作</th>
-<th>实现方式</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>保存图片</td>
-<td><code>canvasToTempFilePath</code> + <code>saveImageToPhotosAlbum</code>（首次需授权）</td>
-</tr>
-<tr>
-<td>生成海报</td>
-<td>Canvas 合成"卡片 + 小程序码（带来源参数）+ 引导文案"</td>
-</tr>
-<tr>
-<td>原生转发</td>
-<td><code>onShareAppMessage</code>，自定义标题/封面</td>
-</tr>
-<tr>
-<td>扫码回流</td>
-<td>记录来源参数，用于归因统计</td>
-</tr>
-</tbody>
-</table></div>
-<hr />
-<h2>6. 闺蜜互测「别人眼里的你」⭐（工程量最大的一块，两个开发建议一人主看穿引擎、一人主这块）</h2>
-<p><strong>边界</strong>：不做"是谁投的"、不做互测历史列表、不做付费解锁。只做"发起 → 匿名投票 → 回访看汇总结果 + 一条推送"。</p>
-<blockquote>
-<p>📌 <strong>待细化的页面结构原则</strong>（先记下结论，具体视觉/交互回头再设计）：F 打开互测卡后，<strong>"测试你自己"和"猜猜 TA 的风格"两个入口同屏并存，不是强制先后顺序</strong>；"测试你自己"是主入口、视觉更显眼，"猜猜 TA"是次入口、更小。这条结构性要求已经反映进下面的时序图，具体页面怎么摆（按钮大小/位置/文案）留到详细页面设计时再定。</p>
-</blockquote>
-<h3>6.1 三方时序图</h3>
-<pre class="mermaid">sequenceDiagram
-    participant U as 发起者
-    participant S as 系统
-    participant F as 朋友
-
-    U-&gt;&gt;S: 点击「发起互测」
-    S-&gt;&gt;S: 生成互测卡（不含发起者自己的AI结果）
-    S-&gt;&gt;U: 申请一次性订阅消息授权
-    U-&gt;&gt;F: 转发互测卡到群/好友
-    F-&gt;&gt;S: 打开互测卡
-    S-&gt;&gt;F: 展示落地页：①「测试你自己」入口（主入口，更显眼）②「猜猜TA是什么风格」入口（次入口，较小）—— 两者并存，不是先后强制顺序
-    par F 可任选其一或都做，顺序不限
-        F-&gt;&gt;S: 走②猜测发起者风格（投票）
-        S-&gt;&gt;S: 记录投票（openid 去重）→ 实时更新汇总
-        S-&gt;&gt;F: 若走完②，追加提示「你猜TA是XX挂，你自己是不是也是？」引导去走①（引用F刚投的标签）
-    and
-        F-&gt;&gt;S: 走①测试自己（带 referral_duel_id，若之前已走过②则同时带 guessed_persona_tag）
-        S-&gt;&gt;F: 走主链路①-⑤生成 F 自己的身份卡
-    end
-    S-&gt;&gt;U: 达到推送里程碑（第1票/第5票）时推送提醒（不与&quot;能否查看&quot;挂钩）
-    U-&gt;&gt;S: 随时点击查看
-    S-&gt;&gt;U: 展示当前实时汇总（哪怕只有1票也直接展示，不锁）+ AI 结果对比 + 「生成对比卡再分享」入口</pre>
-<blockquote>
-<p>⚠️ <strong>设计变更说明（重要）</strong>：原方案"攒够 N 票才解锁结果"经调研确认有合规风险——《微信外部链接内容管理规范》<strong>2.1.1 条明文禁止"分享后方可知道答案"</strong>、<strong>2.1.2 条明文禁止"通过签到打卡、邀请好友协助、设置收集任务等形式诱导用户分享"</strong>，2018 年"面相研究院"（同为测试类小程序）就因类似诱导分享+测算内容被永久封禁。已改为<strong>结果永远实时可查、不设门槛、不锁</strong>，参考国内真实验证过的先例「默契大考验」（朋友投完立刻反馈、发起者随时看排行榜，无人数门槛）。这个改动同时<strong>简化了工程量</strong>——不再需要门槛/有效期/锁定这套状态管理。</p>
-</blockquote>
-<h3>6.2 数据结构</h3>
-<p><strong>互测任务表</strong>：<code>duel_id / initiator_openid / initiator_persona_tag（仅结果页对比用，不对朋友展示）/ created_at / pushed_milestones（已推送过的里程碑列表，如 [1]、[1,5]，保证同一里程碑只推1次）</code></p>
-<p><strong>投票记录表</strong>：<code>duel_id / voter_openid（仅去重，不展示）/ voted_persona_tag / voted_at</code>，唯一约束 <code>(duel_id, voter_openid)</code>（防重复投票）</p>
-<p>无需复杂状态机——互测任务发起后即可持续接受投票、持续被查看，没有"锁定/解锁/过期"这些状态流转，<code>pushed_milestones</code> 只是记录"1 票、5 票这两个里程碑分别有没有推送过"的简单标记，新增投票时检查当前票数是否命中未推送过的里程碑（[1, 5]），命中则推送并记录。</p>
-<h3>6.3 关键规则</h3>
-<ul>
-<li>互测卡<strong>不展示发起者自己的 AI 判定结果</strong>（否则朋友"猜"没意义）</li>
-<li>投票<strong>无需登录</strong>，openid 静默识别，同一 openid 对同一互测限投 1 次</li>
-<li>结果页<strong>永远可查看、实时更新</strong>，展示当前汇总投票分布（走"排行榜"风格，不是"最终报告"风格，1 票也直接展示）+ 与 AI 结果对比（比如"AI 说你是清冷挂，朋友也这么觉得"），<strong>不展示任何投票者身份</strong></li>
-<li>推送按里程碑触发（第 1 票、第 5 票各推 1 次，封顶 2 次），作为"有人来猜你了/更多人来猜了"的提醒，跟"能不能看结果"无关（结果随时能看，不依赖推送）</li>
-<li>同一时间只允许一个"进行中"的互测，重新发起覆盖上一个未完成的（简化状态管理）</li>
-<li><strong>不允许</strong>为了避免结果冷清而人工刷票/编造虚假投票——NGL/Sendit 就因编造虚假消息诱导付费解锁被美国监管处罚，这条红线不能碰</li>
-</ul>
-<h3>6.4 朋友投票后，怎么更好地转化他去测试自己</h3>
-<p>投票完只甩一句通用的"你也来测测"太弱，转化率不会高。改成<strong>利用他刚才的猜测本身当钩子</strong>：</p>
-<ul>
-<li><strong>引导文案不再是通用的</strong>，而是引用他刚投的那个标签："你猜 TA 是<strong>清冷氛围挂</strong>——你自己是不是也是这一挂？测测看"</li>
-<li><strong>"先猜后测"反差钩子</strong>（核心改动）：F 测完自己之后，结果页额外插一句对比："你猜 TA 是清冷氛围挂，你自己测出来是<strong>甜辣御姐挂</strong>——你俩完全不是一类人"（或"你俩撞挂了，怪不得这么合得来"）。不管猜没猜中都有内容可讲，这是比"猜没猜中"更有意思的二次爽点，也是让 F 愿意测完自己的直接动机。</li>
-<li><strong>降低点击到测试的摩擦</strong>：F 是从互测卡进来的，已经对这个产品有认知了，点击"测测你自己"应该<strong>直接跳进上传页</strong>，不用再看一遍落地页的介绍样例卡（那套是给冷启动流量看的，F 不需要）。</li>
-<li>这个转化本身需要落到具体页面参数上：F 的自拍上传流程要<strong>带上来源标记</strong>（<code>referral_duel_id</code> + 当时猜的 <code>guessed_persona_tag</code>），这样 F 出卡后才能生成上面那句"先猜后测"对比文案，也才能在埋点里算出完整转化率（见 §8）。</li>
-</ul>
-<h3>6.5 发起者的持续闭环（避免"分享一次就用完"）</h3>
-<p>分享出去之后，发起者只有"等推送"这一个理由回来，确实太单薄，加两个低成本的东西：</p>
-<ul>
-<li><strong>结果页生成"对比卡"再分享</strong> ⭐：把当前投票汇总也做成一张可截图卡片（"朋友们都觉得我是XX挂" + AI 自己的判定结果对比），走跟 §2 身份卡一样的分享三件套（存图/海报/转发）。这样"看结果"这个动作本身又生产出一张新的传播物料，形成"分享→收票→生成对比卡→再分享"的小闭环，而不是分享一次就断了。</li>
-<li><strong>推送改成"里程碑式"，不是只推 1 次</strong>：第 1 票推送 1 次；之后再新增到一个里程碑（比如第 5 票）再推 1 次，总共 2-3 次封顶，不做成无限推送骚扰，但也别完全静默——只推 1 次的话大概率用户看完就再也不会主动想起回来看了。</li>
-<li><strong>结果页留一个"再来一轮·换一批朋友测测"入口</strong>：允许发起者对同一个人设卡重新发起一轮互测（比如测完闺蜜群还想拿去问同事群），让互测本身可以被重复触发，而不是一次性用完的工具。</li>
-</ul>
-<blockquote>
-<p>这几条不是"加留存深度"（那类东西仍然按定稿后置到 V1.1），而是让<strong>互测本身</strong>（首炮里已经决定要做的裂变+留存双引擎）真正起到该起的作用——如果分享一次就死，互测回访率这个核心指标从设计上就跑不出来。</p>
-</blockquote>
-<hr />
-<h2>7. 使用次数限制与变现门槛 ⭐（新增）</h2>
-<p><strong>规则</strong>：每个用户（按 openid 计，仅统计成功出卡次数）——</p>
-<div class="tw"><table>
-<thead>
-<tr>
-<th>第几次</th>
-<th>门槛</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>第 1 次</td>
-<td>完全免费，无门槛</td>
-</tr>
-<tr>
-<td>第 2 次</td>
-<td>看完 1 次激励视频广告即可解锁</td>
-</tr>
-<tr>
-<td>第 3 次及以后</td>
-<td>二选一：看视频解锁 / 付费解锁</td>
-</tr>
-</tbody>
-</table></div>
-<blockquote>
-<p>⚠️ <strong>明确不做"拉好友解锁"</strong>：原方案里"拉好友才能解锁使用次数"已经排除——这跟 §6 互测里"转发给朋友"性质完全不同：互测的分享是<strong>用户自愿发起、不解锁任何东西</strong>（不分享也能正常用自己的功能），而"拉好友才能继续用"是<strong>把继续使用的权限跟邀请行为强制绑定</strong>，正好命中《微信外部链接内容管理规范》2.1.2 条"邀请好友协助"的禁止范围（见 §6.1 上方的设计变更说明）。<strong>"拉好友"这件事只应该自然存在于互测这个功能本身里，不应该被用作次数限制的解锁手段</strong>，两者不能混为一谈。</p>
-</blockquote>
-<p><strong>交互流程</strong>：用户点击「上传自拍」发起新一次测试 → 后端查该 openid 的历史成功出卡次数 → 命中第 2 次或以上的门槛 → 弹出解锁选择（第2次只显示"看视频"；第3次起同时显示"看视频"/"付费"两个按钮）→ 解锁成功才放行进入 §3 的上传流程；中途关闭广告/取消支付则不放行，可重新触发。</p>
-<p><strong>技术依赖</strong>（这两项申请/接入都有审核周期，比开发本身更容易卡上线时间，今天就要去启动）：
-- 微信小程序<strong>流量主-激励视频广告</strong>开通与广告位申请
-- 微信支付商户号接入（若还没有）</p>
-<p><strong>待拍板</strong>：付费解锁的具体定价（单次价格，今天先给个默认值，比如 ¥3-6，别为这个卡进度，后面随时能改）。</p>
-<hr />
-<h2>8. 数据埋点（全局汇总，直接照这个表埋）</h2>
-<div class="tw"><table>
-<thead>
-<tr>
-<th>模块</th>
-<th>事件</th>
-<th>关键参数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>主链路</td>
-<td><code>upload_start</code>, <code>precheck_fail</code>, <code>engine_call_success/fail</code>, <code>card_shown</code>, <code>card_detail_view</code>, <code>my_page_view</code></td>
-<td>原因、耗时、persona_tag、<code>referral_duel_id</code>（若来自互测转化）、<code>referral_guessed_tag</code>（若来自互测转化，F 当时猜的标签）、<code>test_count</code>（这是该用户第几次出卡）</td>
-</tr>
-<tr>
-<td>分享</td>
-<td><code>save_image</code>, <code>generate_poster</code>, <code>share_click</code>, <code>scan_back</code></td>
-<td>persona_tag、来源</td>
-</tr>
-<tr>
-<td>互测-发起</td>
-<td><code>duel_initiate</code>, <code>duel_share</code>, <code>duel_result_card_share</code>（对比卡二次分享）</td>
-<td>initiator persona_tag</td>
-</tr>
-<tr>
-<td>互测-投票</td>
-<td><code>duel_vote_submit</code>, <code>duel_self_test_prompt_shown</code>, <code>duel_self_test_click</code></td>
-<td>voted_persona_tag</td>
-</tr>
-<tr>
-<td>互测-回访</td>
-<td><code>duel_push_sent</code>（带 milestone 参数：first/5th）, <code>duel_result_view</code></td>
-<td>票数</td>
-</tr>
-<tr>
-<td>使用门槛</td>
-<td><code>usage_gate_shown</code>（带 test_count）, <code>rewarded_ad_watch_complete</code>/<code>rewarded_ad_watch_abandon</code>, <code>unlock_payment_success</code>/<code>unlock_payment_fail</code></td>
-<td>test_count、解锁方式</td>
-</tr>
-</tbody>
-</table></div>
-<p><strong>完整的"朋友转化"漏斗</strong>（对应 §6.4）：<code>duel_vote_submit</code> → <code>duel_self_test_prompt_shown</code> → <code>duel_self_test_click</code> → <code>upload_start</code>(<code>referral_duel_id</code>非空) → <code>card_shown</code>(<code>referral_duel_id</code>非空)。这样能算出朋友投票后<strong>真正完成自己测试</strong>的转化率，而不只是"点了引导"这一步的点击率。</p>
-<p><strong>最重要的几个指标</strong>：<code>card_shown</code>→<code>share_click</code>（出卡→分享转化率）、<code>duel_push_sent</code>→<code>duel_result_view</code>（互测回访率）、<code>duel_vote_submit</code>→<code>card_shown</code>(referral非空)（朋友转化率，含二次传播效果）、<code>usage_gate_shown</code>→解锁成功（次数门槛的流失率）。openid 全链路去重。</p>
-<hr />
-<h2>9. 合规底线（贯穿，不能省）</h2>
-<ul>
-<li>自拍<strong>阅后即焚</strong>：调用看穿引擎期间存在于内存/临时存储，处理完立即删除，不落库、不进日志</li>
-<li><strong>不打分</strong>、正向措辞、非诊断，见 §1.3 禁用词表</li>
-<li>对外定位统一"美妆风格推荐工具"，不出现"测/算/命"字样</li>
-<li>使用次数限制<strong>不得</strong>用"邀请好友"作为解锁方式，见 §7</li>
-</ul>
-<hr />
-<h2>10. 本期不做（防止范围蔓延）</h2>
-<p>今日推荐色、我的形象档案、独立妆容方案/分步妆教、付费深度报告、社区/连续打卡、男性人设标签库、互测投票明细/历史列表——全部后置，两个开发看到这些需求不要接。</p>
-<hr />
-<h2>11. 前置条件</h2>
-<ul>
-<li>微信小程序主体认证（已有）</li>
-<li>多模态视觉模型 API 账号/额度（今天就要定下来用哪个，卡着 §1 开工）</li>
-<li>对象存储 + CDN（自拍临时存储）</li>
-<li>微信小程序流量主-激励视频广告位申请（卡着 §7 开工，今天就要提交申请）</li>
-<li>微信支付商户号（卡着 §7 的付费解锁，今天就要确认有没有、没有就立刻申请）</li>
-</ul>
-<hr />
-<h2>12. 需要拍板的问题</h2>
-<ul>
-<li>[ ] 用哪个多模态模型（决定 §1 能不能开工，这条相对紧迫）</li>
-<li>[ ] 立刻确认/申请：微信流量主激励视频广告位、微信支付商户号（决定 §7 能不能按时上线，审核周期不受开发进度控制，越早提交越好）</li>
-<li>[ ] 付费解锁定价（先给个默认值，比如 ¥3-6，不阻塞开发）</li>
-</ul>
-<p><strong>男性用户上传自拍怎么处理——已有建议，不用再纠结：</strong></p>
-<p><strong>不做性别检测，男性和女性走完全同一套逻辑</strong>（同样 8 个人设标签 + 妆容方向），不新增任何判断分支。理由：
-- 首炮赌的是传播，不是精准服务某一群体。男性测出"甜辣御姐挂"配一句妆容建议，大概率不是体验事故，反而可能因为反差/好笑而更愿意截图分享——这本身是一种社交货币，跟测试类产品"梗"的传播逻辑是一致的（不是bug，是feature）。
-- 做性别检测反而增加成本和风险：多一次判断逻辑、模型判断性别本身可能出错、"根据外貌判断性别再区别对待"这件事本身也有冒犯争议——不做才是更安全、更省事的选择。
-- 唯一的违和点只在"妆容方向"这一行文案，不影响人设标签/金句/反差洞察这些核心体验。上线后如果真实数据显示男性用户占比高、且流失/差评明显，再考虑把"妆容方向"换成更中性的"风格方向"表述（内容侧小改，不影响引擎结构），不需要现在就设计。</p>
   </div>
   <footer class="foot">
     <p>这是我在做产品时沉淀的方法论文档之一。</p>
